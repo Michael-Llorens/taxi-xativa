@@ -1,0 +1,16 @@
+{
+  "name": "taxi-xativa",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Web de Taxi Xàtiva - Ricardo Llorens",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^5.6.1"
+  }
+}

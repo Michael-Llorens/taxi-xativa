@@ -1,0 +1,56 @@
+---
+const features = [
+  { id: 'reloj', texto: 'Puntualidad garantizada.' },
+  { id: 'taxi', texto: 'Vehículo nuevo y cómodo.' },
+  { id: 'escudo', texto: 'Seguridad y confianza.' },
+  { id: 'persona', texto: 'Atención cercana.' },
+];
+---
+
+<section class="porque">
+  <div class="contenedor">
+    <h2 class="reveal reveal--up">¿Por qué elegir Taxi Xàtiva?</h2>
+    <div class="porque__grid">
+      {features.map((f, i) => (
+        <div class="feature reveal reveal--up" style={`transition-delay:${i * 0.12}s`}>
+          <div class="feature__icon">
+            {f.id === 'reloj' && (
+              <svg viewBox="0 0 64 64" fill="none">
+                <circle cx="38" cy="34" r="18" stroke="#1a1a1a" stroke-width="3" />
+                <path d="M38 24v10l7 5" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4 24h14M2 32h12M6 40h12" stroke="#ffd331" stroke-width="3" stroke-linecap="round" />
+              </svg>
+            )}
+            {f.id === 'taxi' && (
+              <svg viewBox="0 0 64 64" fill="none">
+                <path d="M10 40v6M54 40v6" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+                <path d="M8 40l3-12a6 6 0 0 1 5.7-4.1h30.6A6 6 0 0 1 53 28l3 12v0H8v0Z" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round" />
+                <path d="M17 28l2-6h26l2 6" stroke="#ffd331" stroke-width="3" stroke-linejoin="round" />
+                <circle cx="18" cy="40" r="4" stroke="#1a1a1a" stroke-width="3" />
+                <circle cx="46" cy="40" r="4" stroke="#1a1a1a" stroke-width="3" />
+                <path d="M26 17h12" stroke="#ffd331" stroke-width="3" stroke-linecap="round" />
+              </svg>
+            )}
+            {f.id === 'escudo' && (
+              <svg viewBox="0 0 64 64" fill="none">
+                <path d="M6 38l3-10a5 5 0 0 1 4.7-3.5h22.6A5 5 0 0 1 41 28l3 10H6Z" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round" />
+                <circle cx="15" cy="38" r="3.5" stroke="#1a1a1a" stroke-width="3" />
+                <circle cx="35" cy="38" r="3.5" stroke="#1a1a1a" stroke-width="3" />
+                <path d="M50 20l8 3v7c0 6-4 9-8 11-4-2-8-5-8-11v-7l8-3Z" stroke="#ffd331" stroke-width="3" stroke-linejoin="round" />
+                <path d="M47 30l2.5 2.5L54 28" stroke="#ffd331" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            )}
+            {f.id === 'persona' && (
+              <svg viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="20" r="9" stroke="#1a1a1a" stroke-width="3" />
+                <path d="M16 52a16 16 0 0 1 32 0" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+                <path d="M22 40c4 4 16 4 20 0" stroke="#ffd331" stroke-width="3" stroke-linecap="round" />
+              </svg>
+            )}
+          </div>
+          <p>{f.texto}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

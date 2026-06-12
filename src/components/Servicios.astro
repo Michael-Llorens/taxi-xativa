@@ -1,0 +1,32 @@
+---
+import { getImage } from 'astro:assets';
+import imgLocal from '../assets/img/servicio-local.jpg';
+import imgAero from '../assets/img/servicio-aeropuerto.webp';
+import imgEmpresa from '../assets/img/servicio-empresas.webp';
+
+const fuentes = [
+  { img: imgLocal, titulo: 'Traslados locales en Xàtiva' },
+  { img: imgAero, titulo: 'Viajes a aeropuertos' },
+  { img: imgEmpresa, titulo: 'Taxi para empresas y particulares' },
+];
+
+const servicios = await Promise.all(
+  fuentes.map(async (s) => ({
+    titulo: s.titulo,
+    src: (await getImage({ src: s.img, format: 'webp', width: 500, quality: 74 })).src,
+  }))
+);
+---
+
+<section class="servicios" id="servicios">
+  <div class="contenedor">
+    <h2 class="reveal reveal--up">Servicios destacados</h2>
+    <div class="servicios__grid">
+      {servicios.map((s, i) => (
+        <article class="tarjeta reveal reveal--up" style={`background-image:url('${s.src}');transition-delay:${i * 0.12}s`}>
+          <span>{s.titulo}</span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

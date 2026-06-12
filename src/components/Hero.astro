@@ -1,0 +1,55 @@
+---
+import { getImage } from 'astro:assets';
+import hero1 from '../assets/img/hero-1.jpg';
+import hero2 from '../assets/img/hero-2.webp';
+
+const palabras = ['Puntualidad', 'Comodidad', 'Confianza en cada viaje'];
+
+const slide1 = await getImage({ src: hero1, format: 'webp', width: 1600, quality: 72 });
+const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality: 72 });
+---
+
+<section class="hero">
+  <div class="hero__slideshow" aria-hidden="true">
+    <div class="hero__slide is-active" style={`background-image:url('${slide1.src}')`}></div>
+    <div class="hero__slide" style={`background-image:url('${slide2.src}')`}></div>
+  </div>
+  <div class="contenedor hero__inner">
+    <h1 class="reveal reveal--right">Tu taxi en Xàtiva con más de 10 años de experiencia.</h1>
+    <span class="hero__rotador reveal reveal--right" id="rotador">
+      <span class="hero__word" id="heroWord">{palabras[0]}</span>
+    </span>
+    <a href="/#contacto" class="btn-amarillo reveal reveal--right">Reserva tu taxi ahora</a>
+  </div>
+  <a class="hero__scroll" href="#quien-soy" aria-label="Desplázate hacia abajo"><span></span></a>
+</section>
+
+<script>
+  // Slideshow de fondo con crossfade
+  const slides = document.querySelectorAll<HTMLElement>('.hero__slide');
+  if (slides.length > 1) {
+    let s = 0;
+    setInterval(() => {
+      slides[s].classList.remove('is-active');
+      s = (s + 1) % slides.length;
+      slides[s].classList.add('is-active');
+    }, 5000);
+  }
+
+  // Titular rotatorio con efecto clip
+  const word = document.getElementById('heroWord');
+  if (word) {
+    const palabras = ['Puntualidad', 'Comodidad', 'Confianza en cada viaje'];
+    let i = 0;
+    setInterval(() => {
+      word.classList.add('saliendo');
+      setTimeout(() => {
+        i = (i + 1) % palabras.length;
+        word.textContent = palabras[i];
+        word.classList.remove('saliendo');
+        word.classList.add('entrando');
+        setTimeout(() => word.classList.remove('entrando'), 600);
+      }, 400);
+    }, 2800);
+  }
+</script>

@@ -1,0 +1,33 @@
+---
+---
+
+<header class="cabecera">
+  <div class="contenedor cabecera__inner">
+    <a href="/" class="cabecera__logo">
+      <img src="/img/logo.webp" alt="Taxi Xàtiva" />
+    </a>
+    <nav class="nav" id="nav">
+      <ul class="nav__menu">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/#servicios">Servicios</a></li>
+        <li><a href="/#calculadora">Precios</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+      </ul>
+      <a href="tel:+34722267668" class="btn-tel">Tel: 722 26 76 68</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const nav = document.getElementById('nav');
+  const toggle = document.getElementById('navToggle');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => nav.classList.toggle('abierto'));
+    nav.querySelectorAll('.nav__menu a').forEach((a) =>
+      a.addEventListener('click', () => nav.classList.remove('abierto'))
+    );
+  }
+</script>

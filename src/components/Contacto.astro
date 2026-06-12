@@ -1,0 +1,49 @@
+---
+---
+
+<section class="contacto" id="contacto">
+  <div class="contenedor">
+    <h2 class="reveal reveal--up">Contacto</h2>
+    <form class="form reveal reveal--up" id="formReserva">
+      <label class="sr-only" for="f-nombre">Nombre</label>
+      <input id="f-nombre" type="text" name="nombre" placeholder="Nombre*" autocomplete="name" required />
+      <label class="sr-only" for="f-telefono">Teléfono</label>
+      <input id="f-telefono" type="text" name="telefono" placeholder="Teléfono*" autocomplete="tel" required />
+      <label class="sr-only" for="f-fyh">Fecha y hora del viaje</label>
+      <input id="f-fyh" type="text" name="fyh" placeholder="Fecha y hora del viaje*" required />
+      <label class="sr-only" for="f-oyd">Origen y destino</label>
+      <input id="f-oyd" type="text" name="oyd" placeholder="Origen y destino*" required />
+      <label class="form__check">
+        <input type="checkbox" name="politica" required />
+        <span>He leído y acepto la <a href="/politica-privacidad">política de privacidad</a>.</span>
+      </label>
+      <button type="submit" class="btn-amarillo">Reserva tu taxi ahora</button>
+      <p class="form__nota">Al enviar se abrirá <strong>WhatsApp</strong> con tu solicitud lista para confirmar.</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('formReserva') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const data = new FormData(form);
+    const nombre = (data.get('nombre') || '').toString().trim();
+    const telefono = (data.get('telefono') || '').toString().trim();
+    const fyh = (data.get('fyh') || '').toString().trim();
+    const oyd = (data.get('oyd') || '').toString().trim();
+
+    const mensaje =
+      `Hola Ricardo, quiero reservar un taxi:%0A%0A` +
+      `*Nombre:* ${nombre}%0A` +
+      `*Teléfono:* ${telefono}%0A` +
+      `*Fecha y hora:* ${fyh}%0A` +
+      `*Origen y destino:* ${oyd}`;
+
+    window.open(`https://wa.me/34722267668?text=${mensaje}`, '_blank', 'noopener');
+  });
+</script>

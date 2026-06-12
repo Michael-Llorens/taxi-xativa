@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import foto2 from '../assets/img/quien-soy-2.jpg';
+import foto1 from '../assets/img/quien-soy-1.png';
+
+const fotos = [
+  { src: foto2, alt: 'Taxi de Ricardo en la plaza de Xàtiva' },
+  { src: foto1, alt: 'Ricardo Llorens, taxista en Xàtiva' },
+];
+---
+
+<section class="quien" id="quien-soy">
+  <div class="quien__texto reveal reveal--left">
+    <h2>Quién soy</h2>
+    <p>
+      Soy Ricardo Llorens, taxista en Xàtiva con más de diez años de experiencia
+      ofreciendo un servicio cercano, seguro y adaptado a cada persona. Mi prioridad
+      siempre ha sido que cada cliente llegue a su destino con la tranquilidad de viajar
+      en un vehículo moderno, limpio y cómodo, sabiendo que puede contar con mi puntualidad
+      y trato profesional. Conozco cada rincón de Xàtiva y sus alrededores, lo que me permite
+      garantizar rutas eficientes, ahorrar tiempo y ofrecer una atención personalizada tanto
+      a particulares como a empresas.
+    </p>
+  </div>
+  <div class="quien__imgs reveal reveal--right">
+    <div class="carrusel" id="carruselQuien">
+      <div class="carrusel__pista">
+        {fotos.map((f, i) => (
+          <Image
+            class={`carrusel__img${i === 0 ? ' is-active' : ''}`}
+            src={f.src}
+            alt={f.alt}
+            widths={[400, 640, 900]}
+            sizes="(max-width: 980px) 90vw, 460px"
+            loading="lazy"
+          />
+        ))}
+      </div>
+      <div class="carrusel__dots">
+        {fotos.map((_, i) => (
+          <button class={`carrusel__dot${i === 0 ? ' is-active' : ''}`} type="button" aria-label={`Foto ${i + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const car = document.getElementById('carruselQuien');
+  if (car) {
+    const imgs = car.querySelectorAll('.carrusel__img');
+    const dots = car.querySelectorAll('.carrusel__dot');
+    let idx = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    const mostrar = (n: number) => {
+      idx = (n + imgs.length) % imgs.length;
+      imgs.forEach((im, i) => im.classList.toggle('is-active', i === idx));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    };
+    const auto = () => {
+      timer = setInterval(() => mostrar(idx + 1), 4500);
+    };
+    dots.forEach((d, i) =>
+      d.addEventListener('click', () => {
+        mostrar(i);
+        clearInterval(timer);
+        auto();
+      })
+    );
+    auto();
+  }
+</script>

@@ -1,0 +1,141 @@
+---
+import '../styles/global.css';
+import Cookies from '../components/Cookies.astro';
+import BarraMovil from '../components/BarraMovil.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Inicio - Taxi Xàtiva | Ricardo Llorens | Radio Taxi Valencia',
+  description = 'Taxi en Xàtiva con más de 10 años de experiencia. Puntualidad, comodidad y confianza. Traslados locales, aeropuertos y empresas. Reserva: 722 26 76 68.',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://taxixativa.es').href;
+const ogImage = new URL('/img/hero-1.jpg', Astro.site ?? 'https://taxixativa.es').href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['TaxiService', 'LocalBusiness'],
+  '@id': 'https://taxixativa.es/#taxi',
+  name: 'Taxi Xàtiva — Ricardo Llorens',
+  description,
+  telephone: '+34722267668',
+  email: 'ricardotaxixativa@gmail.com',
+  url: 'https://taxixativa.es',
+  image: ogImage,
+  logo: new URL('/img/logo.webp', Astro.site ?? 'https://taxixativa.es').href,
+  priceRange: '€€',
+  currenciesAccepted: 'EUR',
+  paymentAccepted: 'Efectivo, Tarjeta',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Xàtiva',
+    addressRegion: 'Valencia',
+    postalCode: '46800',
+    addressCountry: 'ES',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 38.9916788, longitude: -0.5244715 },
+  hasMap: 'https://maps.app.goo.gl/pBQKcu91jcASpt816',
+  sameAs: ['https://maps.app.goo.gl/pBQKcu91jcASpt816'],
+  areaServed: [
+    { '@type': 'City', name: 'Xàtiva' },
+    { '@type': 'AdministrativeArea', name: 'La Costera' },
+    { '@type': 'AdministrativeArea', name: 'Valencia' },
+  ],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59',
+  },
+  availableLanguage: ['es', 'ca'],
+};
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ffd331" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Taxi Xàtiva" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/img/favicon.jpg" />
+    <link rel="apple-touch-icon" href="/img/favicon.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gafata&family=Lato:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+
+    <BarraMovil />
+    <Cookies />
+
+    <!-- Botón volver arriba -->
+    <button class="subir" id="subir" aria-label="Volver arriba">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <script>
+      // Sombra del header + botón subir al hacer scroll
+      const cabecera = document.querySelector('.cabecera');
+      const subir = document.getElementById('subir');
+      const onScroll = () => {
+        const y = window.scrollY;
+        if (cabecera) cabecera.classList.toggle('cabecera--scroll', y > 30);
+        if (subir) subir.classList.toggle('is-visible', y > 600);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      subir?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Animaciones de aparición al hacer scroll (fadeInLeft/Right/Up)
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && els.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

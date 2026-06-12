@@ -1,0 +1,60 @@
+---
+const faqs = [
+  { q: '¿Con cuánta antelación debo reservar?', a: 'En cualquier momento, sujeto a disponibilidad.' },
+  { q: '¿El precio está cerrado?', a: 'Sí, aplico la tarifa oficial.' },
+  { q: '¿Trabajas con empresas?', a: 'Sí, ofrezco traslados para profesionales y compañías.' },
+  { q: '¿Qué formas de pago aceptas?', a: 'Pago en efectivo y con tarjeta.' },
+  { q: '¿Ofreces servicios a aeropuertos?', a: 'Sí, traslados directos a los aeropuertos de Valencia, Alicante y otros destinos.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+
+<section class="faq">
+  <div class="contenedor">
+    <h2 class="reveal reveal--up">Preguntas frecuentes</h2>
+    <div class="faq__cols">
+      <div class="faq__img reveal reveal--left">
+        <img src="/img/faq.webp" alt="Taxi Xàtiva" loading="lazy" decoding="async" />
+      </div>
+      <div class="acordeon reveal reveal--right">
+        {faqs.map((f, i) => (
+          <div class={`acordeon__item${i === 0 ? ' activo' : ''}`}>
+            <button class="acordeon__head" type="button" aria-expanded={i === 0 ? 'true' : 'false'}>{f.q}</button>
+            <div class="acordeon__body"><p>{f.a}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const heads = document.querySelectorAll('.acordeon__head');
+  heads.forEach((head) => {
+    head.addEventListener('click', () => {
+      const item = head.parentElement;
+      if (!item) return;
+      const abierto = item.classList.contains('activo');
+      document.querySelectorAll('.acordeon__item').forEach((i) => {
+        i.classList.remove('activo');
+        i.querySelector('.acordeon__head')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!abierto) {
+        item.classList.add('activo');
+        head.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

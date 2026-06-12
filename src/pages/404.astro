@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Whatsapp from '../components/Whatsapp.astro';
+---
+
+<Layout title="Página no encontrada - Taxi Xàtiva" description="La página que buscas no existe. Vuelve al inicio de Taxi Xàtiva." noindex={true}>
+  <Header />
+  <main class="error404">
+    <div class="contenedor error404__inner">
+      <span class="error404__code">404</span>
+      <h1>Esta ruta no existe</h1>
+      <p>Parece que te has desviado del camino. Volvamos a la ruta correcta.</p>
+      <div class="error404__acciones">
+        <a href="/" class="btn-amarillo">Volver al inicio</a>
+        <a href="tel:+34722267668" class="btn-linea">Llamar: 722 26 76 68</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+  <Whatsapp />
+</Layout>
+
+<style>
+  .error404 {
+    min-height: 64vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+    text-align: center;
+  }
+  .error404__inner { width: 100%; padding: 70px 0; }
+  .error404__code {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(90px, 18vw, 180px);
+    line-height: 1;
+    color: var(--amarillo);
+    text-shadow: 3px 3px 0 #000;
+    display: block;
+  }
+  .error404 h1 { font-size: 32px; margin: 10px 0 12px; }
+  .error404 p { color: #555; max-width: 460px; margin: 0 auto 30px; }
+  .error404__acciones { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-linea {
+    display: inline-block;
+    border: 2px solid var(--negro);
+    color: var(--negro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 13px 30px;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: background .2s, color .2s;
+  }
+  .btn-linea:hover { background: var(--negro); color: #fff; }
+</style>

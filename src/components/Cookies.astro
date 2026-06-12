@@ -1,0 +1,29 @@
+---
+---
+
+<div class="cookies" id="cookies" hidden>
+  <p class="cookies__txt">
+    Usamos cookies propias y técnicas para mejorar tu experiencia. Consulta la
+    <a href="/politica-cookies">política de cookies</a>.
+  </p>
+  <div class="cookies__btns">
+    <button type="button" class="cookies__btn cookies__btn--no" id="cookiesNo">Rechazar</button>
+    <button type="button" class="cookies__btn cookies__btn--si" id="cookiesSi">Aceptar</button>
+  </div>
+</div>
+
+<script>
+  const KEY = 'taxi_cookies_ok';
+  const box = document.getElementById('cookies');
+  if (box && !localStorage.getItem(KEY)) {
+    box.hidden = false;
+    requestAnimationFrame(() => box.classList.add('is-visible'));
+  }
+  const cerrar = (valor: string) => {
+    localStorage.setItem(KEY, valor);
+    box?.classList.remove('is-visible');
+    setTimeout(() => { if (box) box.hidden = true; }, 300);
+  };
+  document.getElementById('cookiesSi')?.addEventListener('click', () => cerrar('aceptado'));
+  document.getElementById('cookiesNo')?.addEventListener('click', () => cerrar('rechazado'));
+</script>
