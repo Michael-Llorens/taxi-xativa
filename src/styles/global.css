@@ -147,32 +147,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
   background: linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.45) 100%);
 }
 .hero__inner { position: relative; z-index: 2; max-width: 640px; margin-left: auto; text-align: left; padding: 60px 0; }
-.hero__scroll {
-  position: absolute;
-  left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%);
-  z-index: 2;
-  width: 26px;
-  height: 44px;
-  border: 2px solid rgba(255,255,255,.7);
-  border-radius: 14px;
-  display: flex;
-  justify-content: center;
-}
-.hero__scroll span {
-  width: 4px;
-  height: 9px;
-  margin-top: 7px;
-  border-radius: 3px;
-  background: var(--amarillo);
-  animation: scrollDot 1.6s ease-in-out infinite;
-}
-@keyframes scrollDot {
-  0% { opacity: 0; transform: translateY(-4px); }
-  50% { opacity: 1; transform: translateY(4px); }
-  100% { opacity: 0; transform: translateY(12px); }
-}
 .hero h1 { font-size: 46px; font-weight: 500; line-height: 1.18; margin-bottom: 10px; }
 .hero__rotador {
   display: block;
@@ -821,7 +795,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
   .wapp-widget { right: 16px; }
   .wapp { width: 54px; height: 54px; }
   .wapp svg { width: 46px; height: 46px; }
-  .hero__scroll { display: none; }
 }
 
 /* >>> Pantallas muy estrechas */
