@@ -1,0 +1,83 @@
+---
+const items = [
+  {
+    id: 'medal',
+    texto: 'Más de 10 años de experiencia',
+  },
+  {
+    id: 'tarifa',
+    texto: 'Tarifa oficial, sin sorpresas',
+  },
+  {
+    id: 'pago',
+    texto: 'Pago en efectivo y con tarjeta',
+  },
+  {
+    id: 'avion',
+    texto: 'Aeropuertos y larga distancia',
+  },
+];
+---
+
+<section class="ventajas" aria-label="Ventajas">
+  <div class="ventajas__grid">
+    {items.map((it) => (
+      <div class="ventaja">
+        <span class="ventaja__icono">
+          {it.id === 'medal' && (
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M9 14.5L8 22l4-2.5L16 22l-1-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6.5l.9 1.8 2 .3-1.45 1.4.34 2L12 12.1l-1.79.9.34-2L9.1 9.6l2-.3.9-1.8z" fill="currentColor"/></svg>
+          )}
+          {it.id === 'tarifa' && (
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l5 5v13H6V3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v6h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 14l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          )}
+          {it.id === 'pago' && (
+            <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M2.5 9.5h19" stroke="currentColor" stroke-width="2"/><path d="M6 14.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          )}
+          {it.id === 'avion' && (
+            <svg viewBox="0 0 24 24" fill="none"><path d="M21 16l-9-4V5.5a1.5 1.5 0 0 0-3 0V12l-6 2.5V17l6-1.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L12 19v-3.5l9 2.5V16z" fill="currentColor"/></svg>
+          )}
+        </span>
+        <span class="ventaja__texto">{it.texto}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .ventajas { background: #1c1c1c; padding: 22px 20px; }
+  .ventajas__grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .ventaja {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    justify-content: center;
+    text-align: left;
+  }
+  .ventaja__icono {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    color: var(--amarillo);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ventaja__icono svg { width: 30px; height: 30px; }
+  .ventaja__texto { font-size: 0.95rem; font-weight: 600; line-height: 1.25; }
+
+  @media (max-width: 860px) {
+    .ventajas__grid { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
+  }
+  @media (max-width: 460px) {
+    .ventajas { padding: 18px 16px; }
+    .ventaja { gap: 10px; }
+    .ventaja__texto { font-size: 0.88rem; }
+  }
+</style>

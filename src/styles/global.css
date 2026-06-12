@@ -283,7 +283,8 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
 
 /* ===================== SERVICIOS ===================== */
 .servicios { background: var(--amarillo); padding: 70px 0; text-align: center; }
-.servicios h2 { font-size: 34px; margin-bottom: 50px; }
+.servicios h2 { font-size: 34px; margin-bottom: 10px; }
+.servicios__sub { max-width: 600px; margin: 0 auto 44px; color: #3a3000; font-size: 15px; }
 .servicios__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -312,14 +313,45 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
   position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.78) 100%);
 }
-.tarjeta span {
+.tarjeta__info {
   position: relative;
   z-index: 2;
-  font-family: var(--fuente-titulo);
-  font-size: 21px;
   text-align: left;
   padding: 24px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tarjeta__titulo { font-family: var(--fuente-titulo); font-size: 21px; line-height: 1.2; }
+.tarjeta__texto {
+  font-size: 13.5px;
+  line-height: 1.45;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity .3s ease, max-height .3s ease;
+}
+.tarjeta:hover .tarjeta__texto { opacity: .95; max-height: 80px; }
+@media (hover: none) {
+  .tarjeta__texto { opacity: .95; max-height: 80px; }
+}
+
+.servicios__otros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 36px;
+}
+.servicios__otros li {
+  background: rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 /* ===================== CALCULADORA ===================== */

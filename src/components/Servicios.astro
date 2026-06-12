@@ -5,28 +5,52 @@ import imgAero from '../assets/img/servicio-aeropuerto.webp';
 import imgEmpresa from '../assets/img/servicio-empresas.webp';
 
 const fuentes = [
-  { img: imgLocal, titulo: 'Traslados locales en Xàtiva' },
-  { img: imgAero, titulo: 'Viajes a aeropuertos' },
-  { img: imgEmpresa, titulo: 'Taxi para empresas y particulares' },
+  {
+    img: imgLocal,
+    titulo: 'Traslados locales en Xàtiva',
+    texto: 'Desplazamientos por Xàtiva y toda La Costera con rutas rápidas y eficientes.',
+  },
+  {
+    img: imgAero,
+    titulo: 'Viajes a aeropuertos',
+    texto: 'Traslados directos a los aeropuertos de Valencia, Alicante y otros destinos.',
+  },
+  {
+    img: imgEmpresa,
+    titulo: 'Empresas y particulares',
+    texto: 'Servicio profesional para compañías, profesionales y desplazamientos personales.',
+  },
 ];
 
 const servicios = await Promise.all(
   fuentes.map(async (s) => ({
     titulo: s.titulo,
+    texto: s.texto,
     src: (await getImage({ src: s.img, format: 'webp', width: 500, quality: 74 })).src,
   }))
 );
+
+const otros = ['Larga distancia', 'Grupos (coordino más vehículos)', 'Turismo por Xàtiva', 'Recogidas con espera'];
 ---
 
 <section class="servicios" id="servicios">
   <div class="contenedor">
     <h2 class="reveal reveal--up">Servicios destacados</h2>
+    <p class="servicios__sub reveal reveal--up">
+      Sea cual sea tu trayecto, te llevo con puntualidad, comodidad y un trato cercano.
+    </p>
     <div class="servicios__grid">
       {servicios.map((s, i) => (
         <article class="tarjeta reveal reveal--up" style={`background-image:url('${s.src}');transition-delay:${i * 0.12}s`}>
-          <span>{s.titulo}</span>
+          <div class="tarjeta__info">
+            <span class="tarjeta__titulo">{s.titulo}</span>
+            <span class="tarjeta__texto">{s.texto}</span>
+          </div>
         </article>
       ))}
     </div>
+    <ul class="servicios__otros reveal reveal--up">
+      {otros.map((o) => <li>{o}</li>)}
+    </ul>
   </div>
 </section>

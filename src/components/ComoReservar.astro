@@ -1,0 +1,116 @@
+---
+const pasos = [
+  {
+    n: '1',
+    titulo: 'Contáctanos',
+    texto: 'Llámanos o escríbenos por WhatsApp a cualquier hora. Te atendemos en el momento.',
+  },
+  {
+    n: '2',
+    titulo: 'Confirmamos tu viaje',
+    texto: 'Acordamos la hora, el recorrido y un presupuesto aproximado, claro y sin sorpresas.',
+  },
+  {
+    n: '3',
+    titulo: 'Te recogemos',
+    texto: 'Pasamos a buscarte puntualmente en el punto que nos indiques. Tú solo disfruta del trayecto.',
+  },
+];
+---
+
+<section class="pasos" id="como-reservar">
+  <div class="contenedor">
+    <h2 class="reveal reveal--up">Reservar tu taxi es muy fácil</h2>
+    <p class="pasos__sub reveal reveal--up">En tres pasos sencillos tienes tu taxi listo.</p>
+
+    <div class="pasos__grid">
+      {pasos.map((p, i) => (
+        <div class="paso reveal reveal--up" style={`transition-delay:${i * 0.12}s`}>
+          <span class="paso__num">{p.n}</span>
+          <h3 class="paso__titulo">{p.titulo}</h3>
+          <p class="paso__texto">{p.texto}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="pasos__cta reveal reveal--up">
+      <a href="tel:+34722267668" class="btn-amarillo">Llamar: 722 26 76 68</a>
+      <a
+        href="https://wa.me/34722267668?text=%C2%A1Hola%20Ricardo!%20Me%20gustar%C3%ADa%20reservar%20un%20taxi."
+        target="_blank"
+        rel="noopener"
+        class="pasos__wa"
+      >
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.8 5.5 2.2 7.9L.5 31.5l7.8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.6 1.2 1.2-4.5-.3-.5c-1.3-2.1-2-4.5-2-6.9C3.1 8.8 8.9 3 16 3s12.9 5.8 12.9 12.9S23.1 28.8 16 28.8zm7.1-9.6c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.8.2-.2.4-.9 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.4 3.7 5.8 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+        Reservar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pasos { padding: 70px 0; text-align: center; }
+  .pasos h2 { font-size: clamp(26px, 3.6vw, 34px); margin-bottom: 10px; }
+  .pasos__sub { color: #555; font-size: 15px; margin: 0 auto 48px; }
+  .pasos__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    counter-reset: paso;
+  }
+  .paso {
+    position: relative;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 40px 26px 30px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.06);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .paso:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(0,0,0,.12); }
+  .paso__num {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--amarillo);
+    color: #000;
+    font-family: var(--fuente-titulo);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(255, 211, 49, 0.5);
+  }
+  .paso__titulo { font-family: var(--fuente-titulo); font-size: 1.2rem; margin-bottom: 10px; color: #1a1a1a; }
+  .paso__texto { color: #444; font-size: 0.95rem; line-height: 1.55; }
+
+  .pasos__cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 44px; }
+  .pasos__wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    border-radius: 6px;
+    background: var(--whatsapp);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-size: 15px;
+    transition: background .2s, transform .2s;
+  }
+  .pasos__wa svg { width: 20px; height: 20px; fill: #fff; }
+  .pasos__wa:hover { background: #1ebe5d; transform: translateY(-2px); }
+
+  @media (max-width: 760px) {
+    .pasos__grid { grid-template-columns: 1fr; gap: 34px; }
+  }
+  @media (max-width: 460px) {
+    .pasos { padding: 50px 0; }
+    .pasos__cta .btn-amarillo, .pasos__wa { width: 100%; justify-content: center; text-align: center; }
+  }
+</style>
