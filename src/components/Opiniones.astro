@@ -34,38 +34,286 @@ const opiniones = [
 ];
 ---
 
-<section class="opiniones">
-  <div class="contenedor">
-    <h2 class="reveal reveal--up">Lo que dicen nuestros clientes</h2>
+<section class="opiniones" id="opiniones">
+  <div class="op-header">
+    <span class="op-kicker">Opiniones</span>
+    <h2>Lo que dicen nuestros clientes</h2>
+    <p class="op-sub">
+      Estas son algunas de las opiniones reales de 5 estrellas de clientes que confían en Taxi Xàtiva en Google.
+    </p>
+  </div>
 
-    <div class="opiniones__rating reveal reveal--up">
-      <span class="opiniones__estrellas" aria-label="5 de 5 estrellas">★★★★★</span>
-      <span class="opiniones__fuente">Reseñas de 5 estrellas de clientes en Google</span>
-    </div>
-
-    <div class="opiniones__grid">
-      {opiniones.map((o) => (
-        <article class="opinion reveal reveal--up">
-          <div class="opinion__top">
-            <span class="opinion__avatar" aria-hidden="true">{o.autor.charAt(0)}</span>
-            <div>
-              <p class="opinion__autor">{o.autor}</p>
-              <span class="opinion__estrellas" aria-hidden="true">★★★★★</span>
+  <div class="op-carrusel">
+    <div class="op-track" id="opTrack">
+      {opiniones.map((o, i) => (
+        <article class="op-card">
+          <header class="op-card-head">
+            <div class="op-avatar" data-color={(i % 6) + 1}>{o.autor.charAt(0)}</div>
+            <div class="op-autor">
+              <strong>{o.autor}</strong>
+              <span>Reseña en Google</span>
             </div>
-            <svg class="opinion__google" viewBox="0 0 48 48" aria-hidden="true">
-              <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-              <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-              <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.98 21.98 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/>
-              <path fill="#EA4335" d="M24 9.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 3.18 29.93 1 24 1 15.4 1 7.96 5.93 4.34 14.12l7.35 5.7C13.42 13.62 18.27 9.75 24 9.75z"/>
-            </svg>
-          </div>
-          <p class="opinion__texto">“{o.texto}”</p>
+            <div class="op-stars" aria-label="5 sobre 5">★★★★★</div>
+          </header>
+          <p>“{o.texto}”</p>
         </article>
       ))}
     </div>
+  </div>
 
-    <a class="opiniones__cta reveal reveal--up" href={GOOGLE_URL} target="_blank" rel="noopener">
-      Ver todas las reseñas en Google
+  <div class="op-cta">
+    <button class="op-arrow op-arrow--prev" id="opPrev" type="button" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <a class="op-btn op-btn--outline op-google" href={GOOGLE_URL} target="_blank" rel="noopener">
+      <span class="google-g" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.98 21.98 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 9.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 3.18 29.93 1 24 1 15.4 1 7.96 5.93 4.34 14.12l7.35 5.7C13.42 13.62 18.27 9.75 24 9.75z"/></svg>
+      </span>
+      Ver todas en Google
+    </a>
+
+    <button class="op-arrow op-arrow--next" id="opNext" type="button" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <a class="op-btn op-btn--primary op-review" href={GOOGLE_URL} target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="op-pen"><path d="M14.06 6.19l3.75 3.75M3 17.25V21h3.75L17.81 9.94a1.5 1.5 0 0 0 0-2.12l-1.63-1.63a1.5 1.5 0 0 0-2.12 0L3 17.25z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Dejar tu reseña
     </a>
   </div>
+  <p class="op-note">¿Has viajado con nosotros? Tu opinión nos ayuda muchísimo.</p>
 </section>
+
+<script>
+  const track = document.getElementById('opTrack');
+  const prev = document.getElementById('opPrev');
+  const next = document.getElementById('opNext');
+
+  if (track) {
+    const mq = window.matchMedia('(max-width: 600px)');
+    const originales = Array.from(track.children);
+    let clonado = false;
+
+    const clones = (add: boolean) => {
+      if (add && !clonado) {
+        originales.forEach((c) => track.appendChild(c.cloneNode(true)));
+        clonado = true;
+      } else if (!add && clonado) {
+        Array.from(track.children).slice(originales.length).forEach((c) => c.remove());
+        clonado = false;
+      }
+    };
+
+    const setup = () => {
+      if (mq.matches) {
+        track.classList.add('is-mobile');
+        clones(false); // móvil: sin duplicados, scroll manual
+      } else {
+        track.classList.remove('is-mobile');
+        clones(true); // escritorio: duplicar para marquee infinito
+      }
+    };
+    mq.addEventListener('change', setup);
+    setup();
+
+    const desplazar = (dir: number) => {
+      const cards = track.querySelectorAll<HTMLElement>('.op-card');
+      if (!cards.length) return;
+      const paso = cards[0].getBoundingClientRect().width + 14;
+      const actual = Math.round(track.scrollLeft / paso);
+      const destino = Math.max(0, Math.min(cards.length - 1, actual + dir));
+      track.scrollLeft = destino * paso; // el CSS scroll-behavior: smooth anima el movimiento
+
+    };
+    prev?.addEventListener('click', () => desplazar(-1));
+    next?.addEventListener('click', () => desplazar(1));
+  }
+</script>
+
+<style>
+  .opiniones {
+    background: #fff7da;
+    padding: 90px 24px;
+    overflow: hidden;
+  }
+
+  /* Cabecera */
+  .op-header { text-align: center; max-width: 720px; margin: 0 auto 50px; }
+  .op-kicker {
+    display: inline-block;
+    font-family: var(--fuente-titulo);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: #9a7b00;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .op-header h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 12px; color: #1a1a1a; }
+  .op-sub { color: #5a5a5a; font-size: 1.05rem; margin: 0; }
+
+  /* Carrusel (marquee) */
+  .op-carrusel {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 12px 0 24px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  .op-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: opScroll 70s linear infinite;
+  }
+  .op-carrusel:hover .op-track,
+  .op-track:focus-within { animation-play-state: paused; }
+
+  @keyframes opScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 12px)); }
+  }
+
+  /* Tarjeta */
+  .op-card {
+    background: #fff;
+    padding: 26px 28px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.07);
+    width: 380px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform .3s ease, box-shadow .3s ease;
+    border: 1px solid rgba(0,0,0,.06);
+  }
+  .op-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.13); }
+  .op-card-head { display: flex; align-items: center; gap: 12px; }
+
+  .op-avatar {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    color: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--fuente-titulo);
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .op-avatar[data-color="1"] { background: linear-gradient(135deg, #ffd331, #f0a500); }
+  .op-avatar[data-color="2"] { background: linear-gradient(135deg, #fbbf24, #f97316); }
+  .op-avatar[data-color="3"] { background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+  .op-avatar[data-color="4"] { background: linear-gradient(135deg, #fde047, #eab308); }
+  .op-avatar[data-color="5"] { background: linear-gradient(135deg, #fbbf24, #d97706); }
+  .op-avatar[data-color="6"] { background: linear-gradient(135deg, #ffd331, #e0922f); }
+
+  .op-autor { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+  .op-autor strong { color: #1a1a1a; font-family: var(--fuente-titulo); font-size: 0.98rem; }
+  .op-autor span { font-size: 0.82rem; color: #6b6b6b; }
+
+  .op-stars { color: #ffb400; font-size: 0.9rem; letter-spacing: 2px; flex-shrink: 0; }
+  .op-card p { color: #333; font-size: 0.95rem; line-height: 1.55; margin: 0; }
+
+  /* CTA */
+  .op-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+  .op-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .op-btn--outline { background: transparent; color: #1a1a1a; border-color: #1a1a1a; }
+  .op-btn--outline:hover { background: #1a1a1a; color: #fff; transform: translateY(-3px); }
+  .op-btn--primary {
+    background: linear-gradient(135deg, #ffd331, #f0a500);
+    color: #1a1a1a;
+    box-shadow: 0 8px 22px rgba(255, 211, 49, 0.4);
+  }
+  .op-btn--primary:hover {
+    background: linear-gradient(135deg, #f0a500, #d97706);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(240, 165, 0, 0.45);
+  }
+  .google-g { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; flex-shrink: 0; }
+  .google-g svg { width: 100%; height: 100%; display: block; }
+  .op-pen { width: 18px; height: 18px; }
+  .op-note { text-align: center; color: #5a5a5a; font-size: 0.9rem; margin: 14px 0 0; }
+
+  /* Flechas (solo móvil) */
+  .op-arrow {
+    display: none;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1.5px solid #e3e3e3;
+    background: #fff;
+    color: #1a1a1a;
+    align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,.07);
+    flex-shrink: 0;
+    transition: background .25s, color .25s, border-color .25s, transform .25s;
+  }
+  .op-arrow svg { width: 22px; height: 22px; }
+  .op-arrow:hover, .op-arrow:focus-visible { background: var(--amarillo); color: #000; border-color: transparent; transform: translateY(-2px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .op-track { animation: none; }
+  }
+
+  /* Tablet: tarjetas algo más estrechas */
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .op-card { width: 320px; }
+  }
+
+  @media (max-width: 768px) {
+    .opiniones { padding: 60px 20px; }
+    .op-header { margin-bottom: 36px; }
+  }
+
+  /* Móvil: carrusel deslizable con scroll-snap y flechas */
+  @media (max-width: 600px) {
+    .op-carrusel { -webkit-mask-image: none; mask-image: none; overflow: visible; padding: 4px 0; }
+    .op-track.is-mobile {
+      width: auto;
+      animation: none;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .op-track.is-mobile::-webkit-scrollbar { display: none; }
+    .op-track.is-mobile .op-card { flex: 0 0 100%; width: 100%; scroll-snap-align: center; }
+
+    .op-cta {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .op-arrow { display: flex; }
+    .op-arrow--prev { grid-area: 1 / 1; }
+    .op-google { grid-area: 1 / 2; width: 100%; justify-content: center; }
+    .op-arrow--next { grid-area: 1 / 3; }
+    .op-review { grid-area: 2 / 1 / auto / -1; justify-self: center; }
+  }
+
+  @media (max-width: 360px) {
+    .opiniones { padding: 50px 14px; }
+    .op-header h2 { font-size: 1.55rem; }
+    .op-sub { font-size: 0.98rem; }
+    .op-card { padding: 18px; }
+  }
+</style>

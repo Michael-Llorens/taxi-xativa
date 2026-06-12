@@ -532,31 +532,34 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
 /* ===================== WHATSAPP ===================== */
 .wapp-widget {
   position: fixed;
-  right: 22px;
-  bottom: 22px;
+  right: 24px;
+  bottom: 24px;
   z-index: 200;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
-/* Botón flotante — réplica exacta del de taxixativa.es */
+/* Botón flotante — réplica del de clinicalauraserra.com (glifo verde con resplandor) */
 .wapp {
   position: relative;
   flex: 0 0 auto;
-  width: 68px;
-  height: 68px;
-  padding: 14px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: var(--whatsapp);
+  background: transparent;
+  color: var(--whatsapp);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 11px rgba(0,0,0,.5);
-  transition: box-shadow .2s ease;
+  filter: drop-shadow(rgba(37, 211, 102, 0.45) 0 6px 14px);
+  transition: filter .3s ease, transform .2s ease;
 }
-.wapp:hover { box-shadow: 0 0 16px rgba(0,0,0,.6); }
-.wapp svg { display: block; width: 40px; height: 40px; pointer-events: none; }
+.wapp:hover {
+  filter: drop-shadow(rgba(37, 211, 102, 0.65) 0 8px 22px);
+  transform: scale(1.05);
+}
+.wapp svg { display: block; width: 48px; height: 48px; pointer-events: none; }
 
 /* Popup tipo píldora — réplica del de clinicalauraserra.com, fondo amarillo claro y texto negro */
 .wapp-tip {
@@ -614,31 +617,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
 .wapp-tip__emoji { font-size: 18px; line-height: 1; }
 .wapp-tip__text { color: #000; font-weight: 600; }
 
-/* ===================== BOTÓN VOLVER ARRIBA ===================== */
-.subir {
-  position: fixed;
-  right: 24px;
-  bottom: 96px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 0;
-  background: var(--header-bg);
-  color: var(--amarillo);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 199;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(12px);
-  box-shadow: 0 6px 16px rgba(0,0,0,.3);
-  transition: opacity .3s ease, transform .3s ease, visibility .3s, background .2s;
-}
-.subir.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
-.subir:hover { background: #000; transform: translateY(-3px); }
-.subir svg { width: 22px; height: 22px; }
 
 /* ===================== ZONAS DE SERVICIO ===================== */
 .zonas { padding: 70px 0; text-align: center; }
@@ -666,63 +644,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
 .zonas__item:hover { background: #fff8df; border-color: var(--amarillo); transform: translateY(-2px); }
 .zonas__item svg { width: 16px; height: 16px; color: var(--amarillo); }
 
-/* ===================== OPINIONES ===================== */
-.opiniones { padding: 70px 0; background: linear-gradient(180deg, #fafafa 0%, #fff 100%); text-align: center; }
-.opiniones h2 { margin-bottom: 16px; }
-.opiniones__rating {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.opiniones__estrellas { color: #ffb400; font-size: 22px; letter-spacing: 2px; }
-.opiniones__fuente { color: #555; font-size: 14px; font-weight: 600; }
-.opiniones__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.opinion {
-  background: #fff;
-  border-radius: 14px;
-  padding: 26px 24px;
-  box-shadow: 0 10px 28px rgba(0,0,0,.08);
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.opinion__top { display: flex; align-items: center; gap: 12px; }
-.opinion__avatar {
-  width: 42px; height: 42px;
-  flex: 0 0 42px;
-  border-radius: 50%;
-  background: var(--amarillo);
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--fuente-titulo);
-  font-size: 19px;
-}
-.opinion__top > div { flex: 1; }
-.opinion__autor { font-weight: 700; color: #000; font-size: 14.5px; line-height: 1.2; }
-.opinion__estrellas { color: #ffb400; letter-spacing: 1px; font-size: 14px; }
-.opinion__google { width: 22px; height: 22px; flex: 0 0 22px; }
-.opinion__texto { color: #333; font-size: 14.5px; line-height: 1.65; flex: 1; }
-.opiniones__cta {
-  display: inline-block;
-  margin-top: 36px;
-  padding: 13px 30px;
-  border: 2px solid var(--negro);
-  border-radius: 999px;
-  font-weight: 700;
-  color: var(--negro);
-  transition: background .2s, color .2s;
-}
-.opiniones__cta:hover { background: var(--negro); color: #fff; }
+/* (Sección de opiniones: estilos propios en src/components/Opiniones.astro) */
 
 /* ===================== BARRA MÓVIL (Llamar / WhatsApp) ===================== */
 .barra-movil { display: none; }
@@ -870,8 +792,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
   .pie__logo img { margin: 0 auto; }
   .pie ul li, .pie__legales li { justify-content: center; }
 
-  .opiniones__grid { grid-template-columns: 1fr; gap: 18px; }
-
   /* Barra fija inferior solo en móvil */
   body { padding-bottom: 56px; }
   .barra-movil {
@@ -882,7 +802,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
     box-shadow: 0 -4px 16px rgba(0,0,0,.18);
   }
   .wapp-widget { bottom: 74px; }
-  .subir { bottom: 136px; }
   .cookies { bottom: 70px; }
 }
 
@@ -899,8 +818,9 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
   .cabecera__inner { height: 72px; }
   .cabecera__logo img { height: 44px; }
   .nav.abierto .nav__menu { top: 72px; }
-  .wapp { width: 52px; height: 52px; right: 16px; bottom: 16px; }
-  .subir { right: 16px; bottom: 78px; }
+  .wapp-widget { right: 16px; }
+  .wapp { width: 54px; height: 54px; }
+  .wapp svg { width: 46px; height: 46px; }
   .hero__scroll { display: none; }
 }
 

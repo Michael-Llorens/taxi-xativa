@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://taxixativa.es').href;
-const ogImage = new URL('/img/hero-1.jpg', Astro.site ?? 'https://taxixativa.es').href;
+const ogImage = new URL('/img/og-taxi-castillo.jpg', Astro.site ?? 'https://taxixativa.es').href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -75,12 +75,18 @@ const jsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Taxi de Ricardo en la puerta del Castillo de Xàtiva" />
     <meta property="og:locale" content="es_ES" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image:alt" content="Taxi de Ricardo en la puerta del Castillo de Xàtiva" />
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href="/img/favicon.jpg" />
@@ -100,23 +106,14 @@ const jsonLd = {
     <BarraMovil />
     <Cookies />
 
-    <!-- Botón volver arriba -->
-    <button class="subir" id="subir" aria-label="Volver arriba">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-
     <script>
-      // Sombra del header + botón subir al hacer scroll
+      // Sombra del header al hacer scroll
       const cabecera = document.querySelector('.cabecera');
-      const subir = document.getElementById('subir');
       const onScroll = () => {
-        const y = window.scrollY;
-        if (cabecera) cabecera.classList.toggle('cabecera--scroll', y > 30);
-        if (subir) subir.classList.toggle('is-visible', y > 600);
+        if (cabecera) cabecera.classList.toggle('cabecera--scroll', window.scrollY > 30);
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
-      subir?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
       // Animaciones de aparición al hacer scroll (fadeInLeft/Right/Up)
       const els = document.querySelectorAll('.reveal');
