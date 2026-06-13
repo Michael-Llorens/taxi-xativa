@@ -25,16 +25,18 @@ const breadcrumb = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
   <Header />
-  <HeroRuta
-    titulo="Taxi de Xàtiva al Aeropuerto de Valencia"
-    subtitulo="Traslados directos entre Xàtiva (y toda La Costera) y el aeropuerto de Valencia-Manises. Puntualidad para llegar con tiempo a tu vuelo y comodidad en todo el trayecto."
-  />
-  <RutaBeneficios
-    intro="El aeropuerto de Valencia (Manises) está a unos 70 km de Xàtiva, alrededor de 50 minutos de viaje. Te llevo y te recojo de forma directa, sin paradas innecesarias, para que viajes tranquilo y llegues a tiempo. Reserva con antelación y deja que me ocupe de todo."
-  />
-  <ComoReservar />
-  <Calculadora />
-  <Contacto />
+  <main id="contenido">
+    <HeroRuta
+      titulo="Taxi de Xàtiva al Aeropuerto de Valencia"
+      subtitulo="Traslados directos entre Xàtiva (y toda La Costera) y el aeropuerto de Valencia-Manises. Puntualidad para llegar con tiempo a tu vuelo y comodidad en todo el trayecto."
+    />
+    <RutaBeneficios
+      intro="El aeropuerto de Valencia (Manises) está a unos 70 km de Xàtiva, alrededor de 50 minutos de viaje. Te llevo y te recojo de forma directa, sin paradas innecesarias, para que viajes tranquilo y llegues a tiempo. Reserva con antelación y deja que me ocupe de todo."
+    />
+    <ComoReservar />
+    <Calculadora />
+    <Contacto />
+  </main>
   <Footer />
   <Whatsapp />
 </Layout>
