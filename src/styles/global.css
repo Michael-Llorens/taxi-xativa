@@ -672,22 +672,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
 
 /* (Sección de opiniones: estilos propios en src/components/Opiniones.astro) */
 
-/* ===================== BARRA MÓVIL (Llamar / WhatsApp) ===================== */
-.barra-movil { display: none; }
-.barra-movil__btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 14px;
-  font-weight: 700;
-  font-size: 15px;
-  color: #fff;
-}
-.barra-movil__btn svg { width: 20px; height: 20px; }
-.barra-movil__btn--call { background: var(--header-bg); color: var(--amarillo); }
-.barra-movil__btn--wa { background: var(--whatsapp-btn); }
 
 /* ===================== AVISO DE COOKIES ===================== */
 .cookies {
@@ -817,18 +801,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
   .pie__grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
   .pie__logo img { margin: 0 auto; }
   .pie ul li, .pie__legales li { justify-content: center; }
-
-  /* Barra fija inferior solo en móvil */
-  body { padding-bottom: 56px; }
-  .barra-movil {
-    display: flex;
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 250;
-    box-shadow: 0 -4px 16px rgba(0,0,0,.18);
-  }
-  .wapp-widget { bottom: 74px; }
-  .cookies { bottom: 70px; }
 }
 
 /* >>> Móvil pequeño */

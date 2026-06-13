@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import Cookies from '../components/Cookies.astro';
-import BarraMovil from '../components/BarraMovil.astro';
 
 interface Props {
   title?: string;
@@ -104,7 +103,6 @@ const jsonLd = {
     <a href="#contenido" class="skip-link">Saltar al contenido</a>
     <slot />
 
-    <BarraMovil />
     <Cookies />
 
     <script>
