@@ -32,7 +32,7 @@ const TARIFA_FESTIVO = 15;
               Día normal <small>{TARIFA_NORMAL} €/km</small>
             </button>
             <button type="button" class="calc__tarifa" data-tarifa={TARIFA_FESTIVO}>
-              Festivo / domingo <small>{TARIFA_FESTIVO} €/km</small>
+              Nocturno, festivo o domingo <small>{TARIFA_FESTIVO} €/km</small>
             </button>
           </div>
         </div>
@@ -96,7 +96,7 @@ const TARIFA_FESTIVO = 15;
         botones.forEach((x) => x.classList.remove('is-active'));
         b.classList.add('is-active');
         tarifa = parseInt(b.dataset.tarifa || '10', 10);
-        tipoDia = tarifa === 15 ? 'festivo o domingo' : 'día normal';
+        tipoDia = tarifa === 15 ? 'nocturno, festivo o domingo' : 'día normal';
         actualizar();
       })
     );

@@ -9,13 +9,16 @@ interface Props {
 }
 
 const {
-  title = 'Inicio - Taxi Xàtiva | Ricardo Llorens | Radio Taxi Valencia',
+  title = 'Taxi Xàtiva | Ricardo Llorens — Radio Taxi en Xàtiva y Valencia',
   description = 'Taxi en Xàtiva con más de 10 años de experiencia. Puntualidad, comodidad y confianza. Traslados locales, aeropuertos y empresas. Reserva: 722 26 76 68.',
   noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://taxixativa.es').href;
-const ogImage = new URL('/img/og-taxi-castillo.jpg', Astro.site ?? 'https://taxixativa.es').href;
+// Imagen para compartir en redes/WhatsApp: logo de la empresa
+const ogImage = new URL('/img/og-taxi-logo.jpg', Astro.site ?? 'https://taxixativa.es').href;
+// Foto del negocio para los datos estructurados
+const fotoNegocio = new URL('/img/og-taxi-castillo.jpg', Astro.site ?? 'https://taxixativa.es').href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -26,7 +29,7 @@ const jsonLd = {
   telephone: '+34722267668',
   email: 'ricardotaxixativa@gmail.com',
   url: 'https://taxixativa.es',
-  image: ogImage,
+  image: fotoNegocio,
   logo: new URL('/img/logo.webp', Astro.site ?? 'https://taxixativa.es').href,
   priceRange: '€€',
   currenciesAccepted: 'EUR',
@@ -76,16 +79,16 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:secure_url" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Taxi de Ricardo en la puerta del Castillo de Xàtiva" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:image:alt" content="Logo de Taxi Xàtiva — Ricardo Llorens" />
     <meta property="og:locale" content="es_ES" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image:alt" content="Taxi de Ricardo en la puerta del Castillo de Xàtiva" />
+    <meta name="twitter:image:alt" content="Logo de Taxi Xàtiva — Ricardo Llorens" />
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href="/img/favicon.jpg" />
