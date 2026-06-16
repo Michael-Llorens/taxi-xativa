@@ -435,6 +435,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 400; }
 .calc__tarifa small { font-weight: 600; color: #888; font-size: 12px; }
 .calc__tarifa.is-active { border-color: var(--amarillo); background: #fff8df; }
 .calc__tarifa.is-active small { color: #000; }
+.calc__hint { margin-top: 10px; font-size: 12.5px; color: #777; }
 .calc__resultado {
   margin: 28px 0 24px;
   padding: 22px;
