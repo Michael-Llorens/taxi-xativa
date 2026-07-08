@@ -15,10 +15,8 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://taxixativa.es').href;
-// Imagen para compartir en redes/WhatsApp: logo de la empresa
-const ogImage = new URL('/img/og-taxi-logo.jpg', Astro.site ?? 'https://taxixativa.es').href;
-// Foto del negocio para los datos estructurados
-const fotoNegocio = new URL('/img/og-taxi-castillo.jpg', Astro.site ?? 'https://taxixativa.es').href;
+// Imagen para compartir en redes/WhatsApp: foto del taxi en el Castillo de Xàtiva (1200×630)
+const ogImage = new URL('/img/og-taxi-castillo.jpg', Astro.site ?? 'https://taxixativa.es').href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -29,13 +27,14 @@ const jsonLd = {
   telephone: '+34722267668',
   email: 'ricardotaxixativa@gmail.com',
   url: 'https://taxixativa.es',
-  image: fotoNegocio,
+  image: ogImage,
   logo: new URL('/img/logo.webp', Astro.site ?? 'https://taxixativa.es').href,
-  priceRange: '€€',
+  priceRange: '€',
   currenciesAccepted: 'EUR',
   paymentAccepted: 'Efectivo, Tarjeta',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Xàtiva',
     addressLocality: 'Xàtiva',
     addressRegion: 'Valencia',
     postalCode: '46800',
@@ -47,7 +46,9 @@ const jsonLd = {
   areaServed: [
     { '@type': 'City', name: 'Xàtiva' },
     { '@type': 'AdministrativeArea', name: 'La Costera' },
-    { '@type': 'AdministrativeArea', name: 'Valencia' },
+    { '@type': 'City', name: 'Valencia' },
+    { '@type': 'City', name: 'Alicante' },
+    { '@type': 'AdministrativeArea', name: 'Comunitat Valenciana' },
   ],
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
@@ -56,6 +57,14 @@ const jsonLd = {
     closes: '23:59',
   },
   availableLanguage: ['es', 'ca'],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    bestRating: '5',
+    worstRating: '1',
+    ratingCount: '6',
+    reviewCount: '6',
+  },
 };
 ---
 
@@ -70,7 +79,7 @@ const jsonLd = {
     <meta name="theme-color" content="#ffd331" />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
 
-    <!-- Open Graph -->
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Taxi Xàtiva" />
     <meta property="og:title" content={title} />
@@ -79,17 +88,17 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:secure_url" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="600" />
-    <meta property="og:image:height" content="600" />
-    <meta property="og:image:alt" content="Logo de Taxi Xàtiva — Ricardo Llorens" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Taxi Xàtiva de Ricardo Llorens frente al Castillo de Xàtiva" />
     <meta property="og:locale" content="es_ES" />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image:alt" content="Logo de Taxi Xàtiva — Ricardo Llorens" />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Taxi Xàtiva de Ricardo Llorens frente al Castillo de Xàtiva" />
 
     <link rel="icon" href="/img/favicon.jpg" />
     <link rel="apple-touch-icon" href="/img/favicon.jpg" />
