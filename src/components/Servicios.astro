@@ -1,6 +1,6 @@
 ---
 import { getImage } from 'astro:assets';
-import imgLocal from '../assets/img/servicio-local.jpg';
+import imgLocal from '../assets/img/servicio-local.webp';
 import imgAero from '../assets/img/servicio-aeropuerto.webp';
 import imgEmpresa from '../assets/img/servicio-empresas.webp';
 
@@ -49,8 +49,6 @@ const otros = ['Larga distancia', 'Grupos (coordino más vehículos)', 'Turismo 
         </article>
       ))}
     </div>
-    <ul class="servicios__otros reveal reveal--up">
-      {otros.map((o) => <li>{o}</li>)}
-    </ul>
+
   </div>
 </section>
