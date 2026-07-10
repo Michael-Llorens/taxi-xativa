@@ -27,10 +27,17 @@
 <script>
   const nav = document.getElementById('nav');
   const toggle = document.getElementById('navToggle');
+  const cabecera = document.querySelector('.cabecera');
   if (toggle && nav) {
-    toggle.addEventListener('click', () => nav.classList.toggle('abierto'));
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('abierto');
+      cabecera?.classList.toggle('menu-abierto');
+    });
     nav.querySelectorAll('.nav__menu a').forEach((a) =>
-      a.addEventListener('click', () => nav.classList.remove('abierto'))
+      a.addEventListener('click', () => {
+        nav.classList.remove('abierto');
+        cabecera?.classList.remove('menu-abierto');
+      })
     );
   }
 </script>

@@ -801,16 +801,17 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   .nav.abierto .nav__menu {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     position: absolute;
     top: 100%; left: 0; right: 0;
     background: var(--amarillo);
-    box-shadow: 0 10px 20px rgba(0,0,0,.18);
     padding: 22px 24px;
     gap: 18px;
   }
   .nav.abierto .nav__menu a { font-size: 17px; }
   .nav.abierto .nav__tel-li { display: block; margin-top: 4px; }
   .nav.abierto .nav__tel-li .btn-tel { display: inline-block; background: var(--negro); color: var(--amarillo); border-color: var(--negro); }
+  .cabecera.menu-abierto { box-shadow: none; }
 
   .quien { grid-template-columns: 1fr; }
   .quien__texto { padding: 56px 32px 34px; text-align: center; }
