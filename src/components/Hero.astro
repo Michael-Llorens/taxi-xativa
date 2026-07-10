@@ -3,7 +3,19 @@ import { getImage } from 'astro:assets';
 import hero1 from '../assets/img/hero-1.webp';
 import hero2 from '../assets/img/hero-2.webp';
 
+interface Props {
+  titulo?: string;
+  subtitulo?: string;
+  ctaHref?: string;
+}
+
 const palabras = ['Puntualidad', 'Comodidad', 'Confianza en cada viaje'];
+
+const {
+  titulo = 'Tu taxi en Xàtiva con más de 10 años de experiencia.',
+  subtitulo,
+  ctaHref = '/#contacto',
+} = Astro.props;
 
 const slide1 = await getImage({ src: hero1, format: 'webp', width: 1600, quality: 72 });
 const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality: 72 });
@@ -15,11 +27,15 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
     <div class="hero__slide" style={`background-image:url('${slide2.src}')`}></div>
   </div>
   <div class="contenedor hero__inner">
-    <h1 class="reveal reveal--right">Tu taxi en Xàtiva con más de 10 años de experiencia.</h1>
-    <span class="hero__rotador reveal reveal--right" id="rotador">
-      <span class="hero__word" id="heroWord">{palabras[0]}</span>
-    </span>
-    <a href="/#contacto" class="btn-amarillo reveal reveal--right">Reserva</a>
+    <h1 class="reveal reveal--right">{titulo}</h1>
+    {subtitulo ? (
+      <span class="hero__rotador reveal reveal--right">{subtitulo}</span>
+    ) : (
+      <span class="hero__rotador reveal reveal--right" id="rotador">
+        <span class="hero__word" id="heroWord">{palabras[0]}</span>
+      </span>
+    )}
+    <a href={ctaHref} class="btn-amarillo reveal reveal--right">Reserva</a>
   </div>
 </section>
 
@@ -35,7 +51,7 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
     }, 5000);
   }
 
-  // Titular rotatorio con efecto clip
+  // Titular rotatorio con efecto clip (solo en homepage)
   const word = document.getElementById('heroWord');
   if (word) {
     const palabras = ['Puntualidad', 'Comodidad', 'Confianza en cada viaje'];

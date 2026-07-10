@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import HeroRuta from '../components/HeroRuta.astro';
+import Hero from '../components/Hero.astro';
 import RutaBeneficios from '../components/RutaBeneficios.astro';
 import ComoReservar from '../components/ComoReservar.astro';
 import Calculadora from '../components/Calculadora.astro';
@@ -26,15 +26,16 @@ const breadcrumb = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
   <Header />
   <main id="contenido">
-    <HeroRuta
+    <Hero
       titulo="Taxi de Xàtiva al Aeropuerto de Alicante"
-      subtitulo="Traslados directos entre Xàtiva (y toda La Costera) y el aeropuerto de Alicante-Elche. Viaja cómodo y llega con tiempo de sobra a tu vuelo."
+      subtitulo="Directo a Alicante-Elche, sin paradas ni sorpresas."
+      ctaHref="#contacto"
     />
     <RutaBeneficios
       intro="El aeropuerto de Alicante-Elche está a unos 115 km de Xàtiva, alrededor de 1 hora y 15 minutos de viaje. Te llevo y te recojo de forma directa y puntual, para que no tengas que preocuparte de nada más que de tu viaje. Reserva con antelación para asegurar la disponibilidad."
     />
-    <ComoReservar />
     <Calculadora />
+    <ComoReservar />
     <Contacto />
   </main>
   <Footer />
