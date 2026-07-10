@@ -107,7 +107,8 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 .btn-tel {
   display: inline-block;
   border: 2px solid var(--negro);
-  color: var(--negro);
+  background: var(--negro);
+  color: var(--amarillo);
   font-weight: 720;
   padding: 10px 22px;
   border-radius: 4px;
@@ -116,7 +117,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   white-space: nowrap;
   transition: background .2s, color .2s;
 }
-.btn-tel:hover { background: var(--negro); color: var(--amarillo); }
+.btn-tel:hover { background: var(--amarillo); color: var(--negro); }
 
 .nav__toggle {
   display: none;
@@ -759,7 +760,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 .reveal--up { transform: translateY(40px); }
 .reveal--left { transform: translateX(-50px); }
 .reveal--right { transform: translateX(50px); }
-.reveal.is-visible { opacity: 1; transform: translate(0, 0); }
+.reveal.is-visible { opacity: 1; transform: translate(0, 0); font-weight: 600; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none; }
@@ -852,7 +853,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   .form .btn-amarillo { justify-self: center; }
   .cabecera__inner { height: 72px; }
   .cabecera__logo img { height: 44px; }
-  .nav.abierto .nav__menu { top: 72px; }
   .quien__imgs { padding: 0 20px 48px; }
   .wapp-widget { right: 16px; }
   .wapp { width: 54px; height: 54px; }
