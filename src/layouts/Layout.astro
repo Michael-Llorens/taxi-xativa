@@ -15,8 +15,8 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://taxixativa.es').href;
-// Imagen para compartir en redes/WhatsApp: foto del taxi en el Castillo de Xàtiva (1200×630)
-const ogImage = new URL('/img/og-taxi-castillo.jpg', Astro.site ?? 'https://taxixativa.es').href;
+// Usar el origen real de la petición para que WhatsApp pueda cargar la imagen en cualquier dominio
+const ogImage = new URL('/img/og-taxi-castillo.jpg', Astro.url.origin).href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
