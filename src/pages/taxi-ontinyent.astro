@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroRuta from '../components/HeroRuta.astro';
+import RutaBeneficios from '../components/RutaBeneficios.astro';
+import ComoReservar from '../components/ComoReservar.astro';
+import Calculadora from '../components/Calculadora.astro';
+import Contacto from '../components/Contacto.astro';
+import Footer from '../components/Footer.astro';
+import Whatsapp from '../components/Whatsapp.astro';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://taxixativa.es/' },
+    { '@type': 'ListItem', position: 2, name: 'Taxi Xàtiva a Ontinyent', item: 'https://taxixativa.es/taxi-ontinyent' },
+  ],
+};
+---
+
+<Layout
+  title="Taxi Xàtiva → Ontinyent | Ricardo Llorens — Traslados directos"
+  description="Taxi de Xàtiva a Ontinyent y vuelta. Solo 27 km en unos 25 minutos, precio orientativo desde 38 €. Puntual y con precio fijo. Reserva: 722 26 76 68."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <Header />
+  <main id="contenido">
+    <HeroRuta
+      titulo="Taxi de Xàtiva a Ontinyent"
+      subtitulo="Traslados directos entre Xàtiva y Ontinyent en menos de 30 minutos. Precio acordado, sin esperas y con total comodidad."
+    />
+    <RutaBeneficios
+      intro="El trayecto de Xàtiva a Ontinyent son aproximadamente 27 km por la CV-660, unos 25–30 minutos de viaje. El precio orientativo ronda los 38 € según la tarifa oficial (1,37 €/km día normal). Te llevo puerta a puerta, cómodo y sin complicaciones."
+    />
+    <ComoReservar />
+    <Calculadora />
+    <Contacto />
+  </main>
+  <Footer />
+  <Whatsapp />
+</Layout>
