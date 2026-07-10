@@ -803,14 +803,14 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
     flex-direction: column;
     position: absolute;
     top: 100%; left: 0; right: 0;
-    background: var(--negro);
-    box-shadow: 0 16px 32px rgba(0,0,0,.5);
+    background: var(--amarillo);
+    box-shadow: 0 10px 20px rgba(0,0,0,.18);
     padding: 22px 24px;
-    gap: 14px;
+    gap: 18px;
   }
-  .nav.abierto .nav__menu a { font-size: 17px; color: var(--amarillo); }
-  .nav.abierto .nav__tel-li { display: block; margin-top: 8px; padding-top: 16px; border-top: 1px solid rgba(255,211,49,.2); }
-  .nav.abierto .nav__tel-li .btn-tel { display: block; width: 100%; text-align: center; background: var(--amarillo); color: var(--negro); border-color: var(--amarillo); }
+  .nav.abierto .nav__menu a { font-size: 17px; }
+  .nav.abierto .nav__tel-li { display: block; margin-top: 4px; }
+  .nav.abierto .nav__tel-li .btn-tel { display: block; width: 100%; text-align: center; background: var(--negro); color: var(--amarillo); border-color: var(--negro); }
 
   .quien { grid-template-columns: 1fr; }
   .quien__texto { padding: 56px 32px 34px; text-align: center; }
