@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import RutaBeneficios from '../components/RutaBeneficios.astro';
+import Ventajas from '../components/Ventajas.astro';
+import RutaInfo from '../components/RutaInfo.astro';
 import ComoReservar from '../components/ComoReservar.astro';
 import Calculadora from '../components/Calculadora.astro';
 import Contacto from '../components/Contacto.astro';
@@ -23,19 +24,20 @@ const breadcrumb = {
   title="Taxi Xàtiva → Aeropuerto de Valencia | Traslados directos"
   description="Taxi de Xàtiva al aeropuerto de Valencia (Manises) y vuelta. Traslados directos y puntuales con precio acordado. Reserva con Ricardo: 722 26 76 68."
 >
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
   <Header />
   <main id="contenido">
     <Hero
       titulo="Taxi de Xàtiva al Aeropuerto de Valencia"
-      subtitulo="Puntual para que no pierdas tu vuelo."
       ctaHref="#contacto"
     />
-    <RutaBeneficios
-      intro="El aeropuerto de Valencia (Manises) está a unos 70 km de Xàtiva, alrededor de 50 minutos de viaje. Te llevo y te recojo de forma directa, sin paradas innecesarias, para que viajes tranquilo y llegues a tiempo. Reserva con antelación y deja que me ocupe de todo."
+    <Ventajas />
+    <RutaInfo
+      titulo="Traslado directo al aeropuerto de Valencia"
+      intro="El aeropuerto de Valencia (Manises) está a unos 70 km de Xàtiva, alrededor de 50 minutos de viaje. Realizo traslados directos, sin paradas innecesarias, para que llegues con tiempo de sobra a tu vuelo. Reserva con antelación y deja que me ocupe de todo."
     />
-    <Calculadora />
     <ComoReservar />
+    <Calculadora />
     <Contacto />
   </main>
   <Footer />

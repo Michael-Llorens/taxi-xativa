@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import RutaBeneficios from '../components/RutaBeneficios.astro';
+import Ventajas from '../components/Ventajas.astro';
+import RutaInfo from '../components/RutaInfo.astro';
 import ComoReservar from '../components/ComoReservar.astro';
 import Calculadora from '../components/Calculadora.astro';
 import Contacto from '../components/Contacto.astro';
@@ -23,19 +24,20 @@ const breadcrumb = {
   title="Taxi Xàtiva → Aeropuerto de Alicante | Traslados directos"
   description="Taxi de Xàtiva al aeropuerto de Alicante-Elche y vuelta. Traslados directos, puntuales y con precio acordado. Reserva con Ricardo: 722 26 76 68."
 >
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
   <Header />
   <main id="contenido">
     <Hero
       titulo="Taxi de Xàtiva al Aeropuerto de Alicante"
-      subtitulo="Directo a Alicante-Elche, sin paradas ni sorpresas."
       ctaHref="#contacto"
     />
-    <RutaBeneficios
-      intro="El aeropuerto de Alicante-Elche está a unos 115 km de Xàtiva, alrededor de 1 hora y 15 minutos de viaje. Te llevo y te recojo de forma directa y puntual, para que no tengas que preocuparte de nada más que de tu viaje. Reserva con antelación para asegurar la disponibilidad."
+    <Ventajas />
+    <RutaInfo
+      titulo="Traslado directo al aeropuerto de Alicante"
+      intro="El aeropuerto de Alicante-Elche está a unos 115 km de Xàtiva, alrededor de 1 hora y 15 minutos de viaje. Te llevo y te recojo de forma directa y puntual, sin transbordos ni esperas inesperadas. Reserva con antelación para asegurar la disponibilidad."
     />
-    <Calculadora />
     <ComoReservar />
+    <Calculadora />
     <Contacto />
   </main>
   <Footer />

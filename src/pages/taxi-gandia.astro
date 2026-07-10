@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import RutaBeneficios from '../components/RutaBeneficios.astro';
+import Ventajas from '../components/Ventajas.astro';
+import RutaInfo from '../components/RutaInfo.astro';
 import ComoReservar from '../components/ComoReservar.astro';
 import Calculadora from '../components/Calculadora.astro';
 import Contacto from '../components/Contacto.astro';
@@ -21,18 +22,19 @@ const breadcrumb = {
 
 <Layout
   title="Taxi Xàtiva → Gandia | Ricardo Llorens — Traslados directos"
-  description="Taxi de Xàtiva a Gandia y vuelta. 47 km en unos 35 minutos, precio orientativo desde 65 €. Puntual y sin sorpresas. Reserva con Ricardo: 722 26 76 68."
+  description="Taxi de Xàtiva a Gandia y vuelta. Traslado directo en unos 35 minutos, puntual y con precio acordado. Reserva con Ricardo: 722 26 76 68."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
   <Header />
   <main id="contenido">
     <Hero
       titulo="Taxi de Xàtiva a Gandia"
-      subtitulo="Cómodo, puntual y con precio fijo acordado."
       ctaHref="#contacto"
     />
-    <RutaBeneficios
-      intro="El trayecto de Xàtiva a Gandia son aproximadamente 47 km por la CV-60, unos 35–40 minutos de viaje. El precio orientativo ronda los 65 € según la tarifa oficial (1,37 €/km día normal). Te llevo y te recojo sin paradas, con total comodidad y sin sorpresas en el precio."
+    <Ventajas />
+    <RutaInfo
+      titulo="Traslado directo de Xàtiva a Gandia"
+      intro="El trayecto de Xàtiva a Gandia son aproximadamente 47 km por la CV-60, unos 35–40 minutos de viaje. Traslado puerta a puerta, sin paradas, cómodo y puntual para que llegues sin estrés a tu destino."
     />
     <ComoReservar />
     <Calculadora />

@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import foto1 from '../assets/img/quien-soy-2.webp';
+import foto2 from '../assets/img/quien-soy-1.webp';
+import foto3 from '../assets/img/coche-castillo.webp';
+import foto4 from '../assets/img/coche-la-seu.webp';
+import foto5 from '../assets/img/coche-font-del-lleo.webp';
+import foto6 from '../assets/img/coche-para.webp';
+import foto7 from '../assets/img/coche-font-25-chorros.webp';
+
+interface Props {
+  titulo: string;
+  intro: string;
+}
+
+const { titulo, intro } = Astro.props;
+
+const beneficios = [
+  'Puntualidad garantizada, siempre a tiempo.',
+  'Precio acordado de antemano, según la tarifa oficial.',
+  'Vehículo amplio y cómodo, con sitio para tu equipaje.',
+  'Recogida también a la vuelta: te esperamos a la llegada.',
+  'Grupos grandes: coordino vehículos adicionales si lo necesitas.',
+  'Pago en efectivo o con tarjeta.',
+];
+
+const fotos = [
+  { src: foto1, alt: 'Taxi de Ricardo en la plaza de Xàtiva' },
+  { src: foto2, alt: 'Ricardo Llorens, taxista en Xàtiva' },
+  { src: foto3, alt: 'Taxi Xàtiva junto al Castillo de Xàtiva' },
+  { src: foto4, alt: 'Taxi Xàtiva en la Seu de Xàtiva' },
+  { src: foto5, alt: 'Taxi Xàtiva en la Font del Lleó' },
+  { src: foto6, alt: 'Taxi Xàtiva en parada oficial de Xàtiva' },
+  { src: foto7, alt: 'Taxi Xàtiva en la Font dels 25 Gorgs' },
+];
+---
+
+<section class="quien" id="ruta-info">
+  <div class="quien__texto reveal reveal--left">
+    <h2>{titulo}</h2>
+    <p>{intro}</p>
+    <ul class="ri__lista">
+      {beneficios.map((b) => (
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          {b}
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="quien__imgs reveal reveal--right">
+    <div class="carrusel" id="carruselRuta">
+      <div class="carrusel__pista">
+        {fotos.map((f, i) => (
+          <Image
+            class={`carrusel__img${i === 0 ? ' is-active' : ''}`}
+            src={f.src}
+            alt={f.alt}
+            widths={[400, 640, 900]}
+            sizes="(max-width: 980px) 90vw, 460px"
+            loading="lazy"
+          />
+        ))}
+      </div>
+      <div class="carrusel__dots">
+        {fotos.map((_, i) => (
+          <button class={`carrusel__dot${i === 0 ? ' is-active' : ''}`} type="button" aria-label={`Foto ${i + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const car = document.getElementById('carruselRuta');
+  if (car) {
+    const imgs = car.querySelectorAll<HTMLElement>('.carrusel__img');
+    const dots = car.querySelectorAll<HTMLElement>('.carrusel__dot');
+    let idx = 0;
+    let timer: ReturnType<typeof setInterval>;
+    const mostrar = (n: number) => {
+      idx = (n + imgs.length) % imgs.length;
+      imgs.forEach((im, i) => im.classList.toggle('is-active', i === idx));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    };
+    const auto = () => { timer = setInterval(() => mostrar(idx + 1), 4500); };
+    dots.forEach((d, i) => d.addEventListener('click', () => { mostrar(i); clearInterval(timer); auto(); }));
+    auto();
+  }
+</script>
+
+<style>
+  .ri__lista {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+    margin-top: 24px;
+    max-width: 460px;
+  }
+  .ri__lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #222;
+    line-height: 1.45;
+  }
+  .ri__lista svg {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    color: #fff;
+    background: var(--whatsapp);
+    border-radius: 50%;
+    padding: 3px;
+    margin-top: 2px;
+  }
+  @media (max-width: 680px) {
+    .ri__lista { grid-template-columns: 1fr; }
+  }
+</style>

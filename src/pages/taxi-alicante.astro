@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import RutaBeneficios from '../components/RutaBeneficios.astro';
+import Ventajas from '../components/Ventajas.astro';
+import RutaInfo from '../components/RutaInfo.astro';
 import ComoReservar from '../components/ComoReservar.astro';
 import Calculadora from '../components/Calculadora.astro';
 import Contacto from '../components/Contacto.astro';
@@ -21,18 +22,19 @@ const breadcrumb = {
 
 <Layout
   title="Taxi Xàtiva → Alicante | Ricardo Llorens — Traslados directos"
-  description="Taxi de Xàtiva a Alicante ciudad y vuelta. 110 km en poco más de 1 hora, precio orientativo desde 150 €. Sin esperas ni transbordos. Reserva: 722 26 76 68."
+  description="Taxi de Xàtiva a Alicante ciudad y vuelta. Traslado directo en poco más de 1 hora, sin transbordos y con precio acordado. Reserva: 722 26 76 68."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
   <Header />
   <main id="contenido">
     <Hero
       titulo="Taxi de Xàtiva a Alicante"
-      subtitulo="Sin transbordos, puerta a puerta y precio fijo."
       ctaHref="#contacto"
     />
-    <RutaBeneficios
-      intro="El trayecto de Xàtiva a Alicante son aproximadamente 110 km por la A-7/AP-7, alrededor de 1 hora y 10 minutos de viaje. El precio orientativo ronda los 150 € según la tarifa oficial (1,37 €/km día normal). Traslado puerta a puerta, sin paradas y con total tranquilidad."
+    <Ventajas />
+    <RutaInfo
+      titulo="Traslado directo de Xàtiva a Alicante"
+      intro="El trayecto de Xàtiva a Alicante son aproximadamente 110 km por la A-7/AP-7, alrededor de 1 hora y 10 minutos de viaje. Traslado directo puerta a puerta, sin transbordos, con total tranquilidad durante todo el recorrido."
     />
     <ComoReservar />
     <Calculadora />
