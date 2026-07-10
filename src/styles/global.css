@@ -810,7 +810,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   }
   .nav.abierto .nav__menu a { font-size: 17px; }
   .nav.abierto .nav__tel-li { display: block; margin-top: 4px; }
-  .nav.abierto .nav__tel-li .btn-tel { display: block; width: 100%; text-align: center; background: var(--negro); color: var(--amarillo); border-color: var(--negro); }
+  .nav.abierto .nav__tel-li .btn-tel { display: inline-block; background: var(--negro); color: var(--amarillo); border-color: var(--negro); }
 
   .quien { grid-template-columns: 1fr; }
   .quien__texto { padding: 56px 32px 34px; text-align: center; }
@@ -848,8 +848,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   .calc__res-precio { font-size: 38px; }
   .porque__grid { grid-template-columns: 1fr; gap: 18px; }
   .feature { padding: 30px 20px; }
-  .btn-amarillo { width: 100%; text-align: center; }
-  .form .btn-amarillo { justify-self: stretch; }
+  .form .btn-amarillo { justify-self: center; }
   .cabecera__inner { height: 72px; }
   .cabecera__logo img { height: 44px; }
   .nav.abierto .nav__menu { top: 72px; }
