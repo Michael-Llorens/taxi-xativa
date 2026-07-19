@@ -1,8 +1,8 @@
 ---
-import '../styles/global.css';
 import Cookies from '../components/Cookies.astro';
 import { getImage } from 'astro:assets';
 import hero1img from '../assets/img/hero-1.webp';
+import globalCSS from '../styles/global.css?raw';
 
 interface Props {
   title?: string;
@@ -105,6 +105,9 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="Taxi Xàtiva de Ricardo Llorens frente al Castillo de Xàtiva" />
+
+    <!-- Global CSS inline: eliminates the render-blocking CSS file -->
+    <Fragment set:html={`<style>${globalCSS}</style>`} />
 
     <link rel="icon" href="/img/favicon.jpg" />
     <link rel="apple-touch-icon" href="/img/favicon.jpg" />
