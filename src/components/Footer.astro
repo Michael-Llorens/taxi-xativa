@@ -1,11 +1,13 @@
 ---
+import { Image } from 'astro:assets';
+import logoBlanco from '../assets/img/logo-blanco.webp';
 ---
 
 <div class="tira-taxi"></div>
 <footer class="pie">
   <div class="contenedor pie__grid">
     <div class="pie__logo">
-      <img src="/img/logo-blanco.webp" alt="Taxi Xàtiva" width="400" height="219" loading="lazy" decoding="async" />
+      <Image src={logoBlanco} alt="Taxi Xàtiva" width={282} height={154} loading="lazy" />
     </div>
     <div>
       <h3>Servicios</h3>

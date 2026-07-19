@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import faqImg from '../assets/img/faq.webp';
 const faqs = [
   { q: '¿Con cuánta antelación debo reservar?', a: 'En cualquier momento, sujeto a disponibilidad.' },
   { q: '¿El precio está cerrado?', a: 'Sí, aplico la tarifa oficial.' },
@@ -26,7 +28,7 @@ const faqSchema = {
     <h2 class="reveal reveal--up">Preguntas frecuentes</h2>
     <div class="faq__cols">
       <div class="faq__img reveal reveal--left">
-        <img src="/img/faq.webp" alt="Taxi Xàtiva" loading="lazy" decoding="async" />
+        <Image src={faqImg} alt="Taxi Xàtiva" width={440} loading="lazy" />
       </div>
       <div class="acordeon reveal reveal--right">
         {faqs.map((f, i) => (

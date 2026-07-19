@@ -17,7 +17,8 @@ const {
   ctaHref = '/#contacto',
 } = Astro.props;
 
-const slide1 = await getImage({ src: hero1, format: 'webp', width: 1600, quality: 72 });
+const slide1sm = await getImage({ src: hero1, format: 'webp', width: 800, quality: 75 });
+const slide1lg = await getImage({ src: hero1, format: 'webp', width: 1600, quality: 72 });
 const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality: 72 });
 ---
 
@@ -25,12 +26,14 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
   <div class="hero__slideshow" aria-hidden="true">
     <div class="hero__slide is-active">
       <img
-        src={slide1.src}
+        src={slide1lg.src}
+        srcset={`${slide1sm.src} 800w, ${slide1lg.src} 1600w`}
+        sizes="100vw"
         alt=""
         fetchpriority="high"
         loading="eager"
-        width={slide1.attributes.width}
-        height={slide1.attributes.height}
+        width={slide1lg.attributes.width}
+        height={slide1lg.attributes.height}
         class="hero__slide-img"
       />
     </div>
