@@ -116,14 +116,24 @@ const opiniones = [
     mq.addEventListener('change', setup);
     setup();
 
-    const desplazar = (dir: number) => {
-      const cards = track.querySelectorAll<HTMLElement>('.op-card');
-      if (!cards.length) return;
-      const paso = cards[0].getBoundingClientRect().width + 14;
-      const actual = Math.round(track.scrollLeft / paso);
-      const destino = Math.max(0, Math.min(cards.length - 1, actual + dir));
-      track.scrollLeft = destino * paso; // el CSS scroll-behavior: smooth anima el movimiento
+    // Cache card width to avoid getBoundingClientRect on every click (forced reflow)
+    let cachedCardWidth = 0;
+    const getCardWidth = (): number => {
+      if (!cachedCardWidth) {
+        const card = track.querySelector<HTMLElement>('.op-card');
+        if (card) cachedCardWidth = card.getBoundingClientRect().width;
+      }
+      return cachedCardWidth;
+    };
+    // Invalidate cache on resize so width stays accurate
+    new ResizeObserver(() => { cachedCardWidth = 0; }).observe(track);
 
+    const desplazar = (dir: number) => {
+      const paso = getCardWidth() + 14;
+      if (!paso) return;
+      const actual = Math.round(track.scrollLeft / paso);
+      const destino = Math.max(0, Math.min(track.querySelectorAll('.op-card').length - 1, actual + dir));
+      track.scrollLeft = destino * paso;
     };
     prev?.addEventListener('click', () => desplazar(-1));
     next?.addEventListener('click', () => desplazar(1));

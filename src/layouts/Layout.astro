@@ -142,7 +142,8 @@ const jsonLd = {
         if (cabecera) cabecera.classList.toggle('cabecera--scroll', window.scrollY > 30);
       };
       window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      // Defer initial check by one rAF: avoids forced reflow while CSS is being applied
+      requestAnimationFrame(onScroll);
 
       // Animaciones de aparición al hacer scroll (fadeInLeft/Right/Up)
       const els = document.querySelectorAll('.reveal');
