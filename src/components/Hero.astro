@@ -22,6 +22,13 @@ const slide1lg = await getImage({ src: hero1, format: 'webp', width: 1600, quali
 const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality: 72 });
 ---
 
+<link
+  rel="preload"
+  as="image"
+  href={slide1sm.src}
+  imagesrcset={`${slide1sm.src} 800w, ${slide1lg.src} 1600w`}
+  imagesizes="100vw"
+/>
 <section class="hero">
   <div class="hero__slideshow" aria-hidden="true">
     <div class="hero__slide is-active">
@@ -57,6 +64,8 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
   const slides = document.querySelectorAll<HTMLElement>('.hero__slide');
   if (slides.length > 1) {
     let s = 0;
+    // Habilitar la transición de opacidad DESPUÉS del primer paint para no penalizar el LCP
+    setTimeout(() => slides.forEach((sl) => sl.classList.add('js-ready')), 100);
     setInterval(() => {
       slides[s].classList.remove('is-active');
       s = (s + 1) % slides.length;
