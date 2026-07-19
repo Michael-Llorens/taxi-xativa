@@ -18,23 +18,17 @@ const {
 } = Astro.props;
 
 const slide1sm = await getImage({ src: hero1, format: 'webp', width: 800, quality: 75 });
+const slide1md = await getImage({ src: hero1, format: 'webp', width: 1080, quality: 72 });
 const slide1lg = await getImage({ src: hero1, format: 'webp', width: 1600, quality: 72 });
 const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality: 72 });
 ---
 
-<link
-  rel="preload"
-  as="image"
-  href={slide1sm.src}
-  imagesrcset={`${slide1sm.src} 800w, ${slide1lg.src} 1600w`}
-  imagesizes="100vw"
-/>
 <section class="hero">
   <div class="hero__slideshow" aria-hidden="true">
     <div class="hero__slide is-active">
       <img
         src={slide1lg.src}
-        srcset={`${slide1sm.src} 800w, ${slide1lg.src} 1600w`}
+        srcset={`${slide1sm.src} 800w, ${slide1md.src} 1080w, ${slide1lg.src} 1600w`}
         sizes="100vw"
         alt=""
         fetchpriority="high"

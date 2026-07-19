@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import Cookies from '../components/Cookies.astro';
+import { getImage } from 'astro:assets';
+import hero1img from '../assets/img/hero-1.webp';
 
 interface Props {
   title?: string;
@@ -15,6 +17,10 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://taxixativa.es').href;
+
+const heroSm = await getImage({ src: hero1img, format: 'webp', width: 800, quality: 75 });
+const heroMd = await getImage({ src: hero1img, format: 'webp', width: 1080, quality: 72 });
+const heroLg = await getImage({ src: hero1img, format: 'webp', width: 1600, quality: 72 });
 // Usar el origen real de la petición para que WhatsApp pueda cargar la imagen en cualquier dominio
 const ogImage = new URL('/img/og-taxi-castillo.jpg', Astro.url.origin).href;
 
@@ -102,6 +108,16 @@ const jsonLd = {
 
     <link rel="icon" href="/img/favicon.jpg" />
     <link rel="apple-touch-icon" href="/img/favicon.jpg" />
+    <!-- Preload LCP hero image — in head so the browser discovers it as early as possible -->
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href={heroSm.src}
+      imagesrcset={`${heroSm.src} 800w, ${heroMd.src} 1080w, ${heroLg.src} 1600w`}
+      imagesizes="100vw"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Gafata&family=Lato:wght@400;700;900&display=swap" />
