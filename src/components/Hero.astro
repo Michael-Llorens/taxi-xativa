@@ -23,7 +23,17 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
 
 <section class="hero">
   <div class="hero__slideshow" aria-hidden="true">
-    <div class="hero__slide is-active" style={`background-image:url('${slide1.src}')`}></div>
+    <div class="hero__slide is-active">
+      <img
+        src={slide1.src}
+        alt=""
+        fetchpriority="high"
+        loading="eager"
+        width={slide1.attributes.width}
+        height={slide1.attributes.height}
+        class="hero__slide-img"
+      />
+    </div>
     <div class="hero__slide" style={`background-image:url('${slide2.src}')`}></div>
   </div>
   <div class="contenedor hero__inner">

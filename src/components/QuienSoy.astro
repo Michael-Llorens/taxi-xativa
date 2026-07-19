@@ -40,8 +40,9 @@ const fotos = [
             class={`carrusel__img${i === 0 ? ' is-active' : ''}`}
             src={f.src}
             alt={f.alt}
-            widths={[400, 640, 900]}
+            widths={[400, 640]}
             sizes="(max-width: 980px) 90vw, 460px"
+            quality={68}
             loading="lazy"
           />
         ))}

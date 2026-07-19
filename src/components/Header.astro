@@ -1,10 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/img/logo.webp';
 ---
 
 <header class="cabecera">
   <div class="contenedor cabecera__inner">
     <a href="/" class="cabecera__logo">
-      <img src="/img/logo.webp" alt="Taxi Xàtiva" width="400" height="219" />
+      <Image src={logo} alt="Taxi Xàtiva" width={282} height={154} loading="eager" />
     </a>
     <nav class="nav" id="nav">
       <ul class="nav__menu">
