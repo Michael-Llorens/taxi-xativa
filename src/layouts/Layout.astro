@@ -125,6 +125,11 @@ const jsonLd = {
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gafata&family=Lato:wght@400;700;900&display=swap" /></noscript>
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <script>
+      import { inject } from '@vercel/analytics';
+      inject();
+    </script>
   </head>
   <body>
     <a href="#contenido" class="skip-link">Saltar al contenido</a>
