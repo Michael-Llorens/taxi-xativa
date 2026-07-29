@@ -6,4 +6,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://taxixativa.es',
   integrations: [sitemap()],
+  vite: {
+    define: {
+      'import.meta.env.VERCEL_ANALYTICS_ID': JSON.stringify(process.env.VERCEL_ANALYTICS_ID),
+    },
+  },
 });
