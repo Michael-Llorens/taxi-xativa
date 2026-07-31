@@ -30,8 +30,6 @@ const waLink = `https://wa.me/${telefono}?text=${mensaje}`;
 </div>
 
 <script>
-  import { track } from '@vercel/analytics';
-
   const btn = document.getElementById('wappBtn');
   const pop = document.getElementById('wappPop');
   const close = document.getElementById('wappClose');
@@ -45,7 +43,12 @@ const waLink = `https://wa.me/${telefono}?text=${mensaje}`;
   let interaccion = false;
 
   // El botón abre WhatsApp (es un enlace); al pulsarlo cerramos la píldora
-  btn?.addEventListener('click', () => { interaccion = true; togglePop(false); track('whatsapp_flotante'); });
+  btn?.addEventListener('click', () => {
+    interaccion = true;
+    togglePop(false);
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({ event: 'whatsapp_flotante' });
+  });
   close?.addEventListener('click', (e) => {
     e.stopPropagation();
     interaccion = true;

@@ -31,8 +31,6 @@
 </section>
 
 <script>
-  import { track } from '@vercel/analytics';
-
   const form = document.getElementById('formReserva') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -40,7 +38,8 @@
       form.reportValidity();
       return;
     }
-    track('reserva_whatsapp');
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({ event: 'reserva_whatsapp' });
 
     const data = new FormData(form);
     const nombre = (data.get('nombre') || '').toString().trim();
@@ -59,6 +58,7 @@
   });
 
   document.querySelector('.btn-llamar')?.addEventListener('click', () => {
-    track('llamada_telefono');
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({ event: 'llamada_telefono' });
   });
 </script>
