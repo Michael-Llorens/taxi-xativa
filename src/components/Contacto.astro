@@ -31,6 +31,8 @@
 </section>
 
 <script>
+  import { track } from '@vercel/analytics';
+
   const form = document.getElementById('formReserva') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -38,6 +40,8 @@
       form.reportValidity();
       return;
     }
+    track('reserva_whatsapp');
+
     const data = new FormData(form);
     const nombre = (data.get('nombre') || '').toString().trim();
     const telefono = (data.get('telefono') || '').toString().trim();
@@ -52,5 +56,9 @@
       `*Origen y destino:* ${oyd}`;
 
     window.open(`https://wa.me/34722267668?text=${mensaje}`, '_blank', 'noopener');
+  });
+
+  document.querySelector('.btn-llamar')?.addEventListener('click', () => {
+    track('llamada_telefono');
   });
 </script>

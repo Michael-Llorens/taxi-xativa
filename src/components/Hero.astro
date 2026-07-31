@@ -54,6 +54,12 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
 </section>
 
 <script>
+  import { track } from '@vercel/analytics';
+
+  document.querySelector('.hero .btn-amarillo')?.addEventListener('click', () => {
+    track('reserva_hero');
+  });
+
   // Slideshow de fondo con crossfade
   const slides = document.querySelectorAll<HTMLElement>('.hero__slide');
   if (slides.length > 1) {
