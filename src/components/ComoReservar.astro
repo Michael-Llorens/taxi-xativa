@@ -106,7 +106,10 @@ const pasos = [
   .pasos__wa svg { width: 20px; height: 20px; fill: #fff; }
   .pasos__wa:hover { background: var(--whatsapp-btn-h); transform: translateY(-2px); }
 
-  @media (max-width: 760px) {
+  @media (max-width: 860px) {
+    .pasos__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
     .pasos__grid { grid-template-columns: 1fr; gap: 34px; }
   }
   @media (max-width: 460px) {

@@ -29,10 +29,10 @@ const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2,
         <div class="calc__campo">
           <span class="calc__label">Tipo de día</span>
           <div class="calc__tarifas" role="group" aria-label="Tipo de día">
-            <button type="button" class="calc__tarifa is-active" data-tarifa={TARIFA_NORMAL}>
+            <button type="button" class="calc__tarifa is-active" data-tarifa={TARIFA_NORMAL} aria-pressed="true">
               Día normal <small>{eur(TARIFA_NORMAL)} €/km</small>
             </button>
-            <button type="button" class="calc__tarifa" data-tarifa={TARIFA_FESTIVO}>
+            <button type="button" class="calc__tarifa" data-tarifa={TARIFA_FESTIVO} aria-pressed="false">
               Nocturno o festivo <small>{eur(TARIFA_FESTIVO)} €/km</small>
             </button>
           </div>
@@ -97,8 +97,9 @@ const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2,
     });
     botones.forEach((b) =>
       b.addEventListener('click', () => {
-        botones.forEach((x) => x.classList.remove('is-active'));
+        botones.forEach((x) => { x.classList.remove('is-active'); x.setAttribute('aria-pressed', 'false'); });
         b.classList.add('is-active');
+        b.setAttribute('aria-pressed', 'true');
         tarifa = parseFloat(b.dataset.tarifa || '1.37');
         tipoDia = tarifa >= 1.5 ? 'nocturno o festivo' : 'día normal';
         actualizar();
