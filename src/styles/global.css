@@ -514,7 +514,9 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 
 /* ===================== CONTACTO ===================== */
 .contacto {
-  background: linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.62)), url('/img/hero-1.webp') center/cover fixed;
+  background-color: #1c1c1c;
+  background-size: cover;
+  background-position: center;
   padding: 70px 0;
   color: #fff;
 }
@@ -778,7 +780,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 .reveal {
   opacity: 0;
   transition: opacity .7s ease, transform .7s ease;
-  will-change: opacity, transform;
 }
 .reveal--up { transform: translateY(40px); }
 .reveal--left { transform: translateX(-50px); }
@@ -848,8 +849,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 
   .calc__campos { grid-template-columns: 1fr; gap: 24px; }
 
-  /* background-attachment:fixed no funciona en iOS Safari */
-  .contacto { background-attachment: scroll; }
 }
 
 /* >>> Tablet mediana: servicios en 2 columnas */
@@ -886,8 +885,6 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   .wapp-widget { right: 16px; }
   .wapp { width: 54px; height: 54px; }
   .wapp svg { width: 46px; height: 46px; }
-  /* background-attachment:fixed no funciona en iOS Safari */
-  .contacto { background-attachment: scroll; }
 }
 
 /* >>> Pantallas muy estrechas */

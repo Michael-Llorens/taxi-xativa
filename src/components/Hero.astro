@@ -38,7 +38,7 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
         class="hero__slide-img"
       />
     </div>
-    <div class="hero__slide" style={`background-image:url('${slide2.src}')`}></div>
+    <div class="hero__slide" data-bg={slide2.src}></div>
   </div>
   <div class="contenedor hero__inner">
     <h1 class="reveal reveal--right">{titulo}</h1>
@@ -63,12 +63,15 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
   const slides = document.querySelectorAll<HTMLElement>('.hero__slide');
   if (slides.length > 1) {
     let s = 0;
-    // Habilitar la transición de opacidad DESPUÉS del primer paint para no penalizar el LCP
     setTimeout(() => slides.forEach((sl) => sl.classList.add('js-ready')), 100);
     setInterval(() => {
       slides[s].classList.remove('is-active');
       s = (s + 1) % slides.length;
-      slides[s].classList.add('is-active');
+      const next = slides[s] as HTMLElement;
+      if (next.dataset.bg && !next.style.backgroundImage) {
+        next.style.backgroundImage = `url('${next.dataset.bg}')`;
+      }
+      next.classList.add('is-active');
     }, 5000);
   }
 

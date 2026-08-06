@@ -1,7 +1,14 @@
 ---
+import { getImage } from 'astro:assets';
+import heroBg from '../assets/img/hero-1.webp';
+const bgOpt = await getImage({ src: heroBg, format: 'webp', width: 1080, quality: 60 });
 ---
 
-<section class="contacto" id="contacto">
+<section
+  class="contacto"
+  id="contacto"
+  style={`background-image:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.62)),url('${bgOpt.src}')`}
+>
   <div class="contenedor">
     <h2 class="reveal reveal--up">Contacto</h2>
     <form class="form reveal reveal--up" id="formReserva">
