@@ -1,3 +1,9 @@
+/* Fuentes autoalojadas — sin dependencia de Google Fonts */
+@import '@fontsource/gafata/latin-ext-400.css';
+@import '@fontsource/lato/latin-ext-400.css';
+@import '@fontsource/lato/latin-ext-700.css';
+@import '@fontsource/lato/latin-ext-900.css';
+
 /* ============================================================
    Taxi Xàtiva — Ricardo Llorens
    ============================================================ */
@@ -188,14 +194,13 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 }
 .hero__word {
   display: inline-block;
-  clip-path: inset(0 0 0 0);
-  transition: clip-path .4s ease, opacity .4s ease, transform .4s ease;
+  transition: opacity .4s ease, transform .4s ease;
 }
-.hero__word.saliendo { clip-path: inset(0 100% 0 0); opacity: 0; transform: translateY(-6px); }
-.hero__word.entrando { animation: clipIn .6s ease forwards; }
-@keyframes clipIn {
-  0% { clip-path: inset(0 100% 0 0); opacity: 0; transform: translateY(8px); }
-  100% { clip-path: inset(0 0 0 0); opacity: 1; transform: translateY(0); }
+.hero__word.saliendo { opacity: 0; transform: translateY(-8px); }
+.hero__word.entrando { animation: wordIn .5s ease forwards; }
+@keyframes wordIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 .btn-amarillo {
   position: relative;
