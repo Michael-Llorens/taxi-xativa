@@ -19,7 +19,7 @@ import logo from '../assets/img/logo.webp';
         </li>
       </ul>
       <a href="tel:+34722267668" class="btn-tel nav__btn-desk">722 26 76 68</a>
-      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú">
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
         <span></span><span></span><span></span>
       </button>
     </nav>
@@ -32,8 +32,10 @@ import logo from '../assets/img/logo.webp';
   const cabecera = document.querySelector('.cabecera');
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
-      nav.classList.toggle('abierto');
-      cabecera?.classList.toggle('menu-abierto');
+      const abierto = nav.classList.toggle('abierto');
+      cabecera?.classList.toggle('menu-abierto', abierto);
+      toggle.setAttribute('aria-expanded', String(abierto));
+      toggle.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
     });
     nav.querySelectorAll('.nav__menu a').forEach((a) =>
       a.addEventListener('click', () => {

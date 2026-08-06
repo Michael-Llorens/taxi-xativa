@@ -30,7 +30,6 @@ const servicios = await Promise.all(
   }))
 );
 
-const otros = ['Larga distancia', 'Grupos (coordino más vehículos)', 'Turismo por Xàtiva', 'Recogidas con espera'];
 ---
 
 <section class="servicios" id="servicios">
@@ -43,8 +42,8 @@ const otros = ['Larga distancia', 'Grupos (coordino más vehículos)', 'Turismo 
       {servicios.map((s, i) => (
         <article class="tarjeta reveal reveal--up" style={`background-image:url('${s.src}');transition-delay:${i * 0.12}s`}>
           <div class="tarjeta__info">
-            <span class="tarjeta__titulo">{s.titulo}</span>
-            <span class="tarjeta__texto">{s.texto}</span>
+            <h3 class="tarjeta__titulo">{s.titulo}</h3>
+            <p class="tarjeta__texto">{s.texto}</p>
           </div>
         </article>
       ))}

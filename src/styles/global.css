@@ -214,21 +214,11 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   box-shadow: 0 8px 20px rgba(255, 211, 49, 0.35);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.btn-amarillo::after {
-  content: "";
-  position: absolute;
-  top: 0; left: -120%;
-  width: 60%; height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
-  transform: skewX(-20deg);
-  transition: left .6s ease;
-}
 .btn-amarillo:hover {
   background: var(--amarillo-osc);
   transform: translateY(-3px);
   box-shadow: 0 12px 26px rgba(255, 211, 49, 0.5);
 }
-.btn-amarillo:hover::after { left: 130%; }
 .btn-amarillo:active { transform: translateY(-1px); }
 
 /* ===================== QUIÉN SOY ===================== */
@@ -298,14 +288,14 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   background: #fff;
   border-radius: 16px;
   padding: 38px 22px;
-  border: 1.5px solid rgba(255,211,49,.45);
+  border: 1.5px solid #eaeaea;
   box-shadow: 0 6px 20px rgba(0,0,0,.07);
-  transition: transform .3s ease, box-shadow .3s ease;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 .feature:hover {
   transform: translateY(-6px);
   box-shadow: 0 16px 36px rgba(0,0,0,.14);
-  border-color: rgba(255,211,49,.9);
+  border-color: var(--amarillo);
 }
 .feature__icon {
   width: 76px; height: 76px;
@@ -793,7 +783,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 .reveal--up { transform: translateY(40px); }
 .reveal--left { transform: translateX(-50px); }
 .reveal--right { transform: translateX(50px); }
-.reveal.is-visible { opacity: 1; transform: translate(0, 0); font-weight: 600; }
+.reveal.is-visible { opacity: 1; transform: translate(0, 0); }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none; }
@@ -860,6 +850,12 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 
   /* background-attachment:fixed no funciona en iOS Safari */
   .contacto { background-attachment: scroll; }
+}
+
+/* >>> Tablet mediana: servicios en 2 columnas */
+@media (max-width: 760px) {
+  .servicios__grid { grid-template-columns: repeat(2, 1fr); }
+  .tarjeta { height: 280px; }
 }
 
 /* >>> Móvil grande */
