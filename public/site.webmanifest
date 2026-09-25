@@ -1,0 +1,12 @@
+{
+  "name": "Taxi Xàtiva — Ricardo Llorens",
+  "short_name": "Taxi Xàtiva",
+  "icons": [
+    { "src": "/img/favicon-96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "/img/favicon-192.png", "sizes": "192x192", "type": "image/png" }
+  ],
+  "theme_color": "#ffd331",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}

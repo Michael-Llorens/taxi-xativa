@@ -54,13 +54,28 @@ const jsonLd = {
     { '@type': 'AdministrativeArea', name: 'La Costera' },
     { '@type': 'City', name: 'Valencia' },
     { '@type': 'City', name: 'Alicante' },
+    { '@type': 'City', name: 'Gandia' },
+    { '@type': 'City', name: 'Ontinyent' },
+    { '@type': 'City', name: 'Canals' },
+    { '@type': 'City', name: "l'Olleria" },
+    { '@type': 'City', name: 'Genovés' },
+    { '@type': 'City', name: 'La Llosa de Ranes' },
+    { '@type': 'City', name: 'Vallés' },
+    { '@type': 'City', name: 'Novelé' },
+    { '@type': 'City', name: 'Barxeta' },
+    { '@type': 'City', name: 'Manuel' },
+    { '@type': 'City', name: "l'Énova" },
+    { '@type': 'City', name: 'Montesa' },
+    { '@type': 'City', name: 'Vallada' },
+    { '@type': 'City', name: 'Moixent' },
+    { '@type': 'City', name: 'Alzira' },
     { '@type': 'AdministrativeArea', name: 'Comunitat Valenciana' },
   ],
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '00:00',
-    closes: '23:59',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '21:00',
   },
   availableLanguage: ['es', 'ca'],
   aggregateRating: {
@@ -113,8 +128,10 @@ const jsonLd = {
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="Taxi Xàtiva de Ricardo Llorens frente al Castillo de Xàtiva" />
 
-    <link rel="icon" href="/img/favicon.jpg" />
-    <link rel="apple-touch-icon" href="/img/favicon.jpg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <!-- Preload LCP hero image — in head so the browser discovers it as early as possible -->
     <link
       rel="preload"

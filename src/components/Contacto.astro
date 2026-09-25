@@ -2,6 +2,16 @@
 import { getImage } from 'astro:assets';
 import heroBg from '../assets/img/hero-1.webp';
 const bgOpt = await getImage({ src: heroBg, format: 'webp', width: 1080, quality: 60 });
+
+const horario = [
+  { dia: 'Lunes', horas: '9:00 – 21:00' },
+  { dia: 'Martes', horas: '9:00 – 21:00' },
+  { dia: 'Miércoles', horas: '9:00 – 21:00' },
+  { dia: 'Jueves', horas: '9:00 – 21:00' },
+  { dia: 'Viernes', horas: '9:00 – 21:00' },
+  { dia: 'Sábado', horas: 'Cerrado' },
+  { dia: 'Domingo', horas: 'Cerrado' },
+];
 ---
 
 <section
@@ -11,7 +21,28 @@ const bgOpt = await getImage({ src: heroBg, format: 'webp', width: 1080, quality
 >
   <div class="contenedor">
     <h2 class="reveal reveal--up">Contacto</h2>
-    <form class="form reveal reveal--up" id="formReserva">
+    <div class="contacto__grid">
+      <div class="horario reveal reveal--left">
+        <h3 class="horario__titulo">
+          <span class="horario__titulo-texto">
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            Horario
+          </span>
+          <span class="horario__estado" id="horarioEstado">Comprobando horario…</span>
+        </h3>
+        <ul class="horario__lista">
+          {horario.map((h) => (
+            <li class={h.horas === 'Cerrado' ? 'is-cerrado' : ''}>
+              <span class="horario__dia">{h.dia}</span>
+              <span class="horario__hora">{h.horas}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <form class="form reveal reveal--up" id="formReserva">
       <label class="sr-only" for="f-nombre">Nombre</label>
       <input id="f-nombre" type="text" name="nombre" placeholder="Nombre*" autocomplete="name" required />
       <label class="sr-only" for="f-telefono">Teléfono</label>
@@ -34,6 +65,7 @@ const bgOpt = await getImage({ src: heroBg, format: 'webp', width: 1080, quality
         722 26 76 68 — Llamar ahora
       </a>
     </form>
+    </div>
   </div>
 </section>
 
@@ -68,4 +100,15 @@ const bgOpt = await getImage({ src: heroBg, format: 'webp', width: 1080, quality
     (window as any).dataLayer = (window as any).dataLayer || [];
     (window as any).dataLayer.push({ event: 'llamada_telefono' });
   });
+
+  const estadoEl = document.getElementById('horarioEstado');
+  if (estadoEl) {
+    const ahora = new Date();
+    const dia = ahora.getDay();
+    const horaActual = ahora.getHours() + ahora.getMinutes() / 60;
+    const esLaborable = dia >= 1 && dia <= 5;
+    const disponible = esLaborable && horaActual >= 9 && horaActual < 21;
+    estadoEl.textContent = disponible ? 'Disponible ahora' : 'Cerrado ahora';
+    estadoEl.classList.add(disponible ? 'is-disponible' : 'is-cerrado');
+  }
 </script>

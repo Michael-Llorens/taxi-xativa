@@ -1,35 +1,29 @@
 ---
-import { getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import imgLocal from '../assets/img/servicio-local.webp';
 import imgAero from '../assets/img/servicio-aeropuerto.webp';
 import imgEmpresa from '../assets/img/servicio-empresas.webp';
 
-const fuentes = [
+const servicios = [
   {
     img: imgLocal,
+    alt: 'Taxi Xàtiva para traslados locales por la ciudad y La Costera',
     titulo: 'Traslados locales en Xàtiva',
     texto: 'Desplazamientos por Xàtiva y toda La Costera con rutas rápidas y eficientes.',
   },
   {
     img: imgAero,
+    alt: 'Taxi Xàtiva de camino a los aeropuertos de Valencia y Alicante',
     titulo: 'Viajes a aeropuertos',
     texto: 'Traslados directos a los aeropuertos de Valencia, Alicante y otros destinos.',
   },
   {
     img: imgEmpresa,
+    alt: 'Taxi Xàtiva para empresas, profesionales y particulares',
     titulo: 'Empresas y particulares',
     texto: 'Servicio profesional para compañías, profesionales y desplazamientos personales.',
   },
 ];
-
-const servicios = await Promise.all(
-  fuentes.map(async (s) => ({
-    titulo: s.titulo,
-    texto: s.texto,
-    src: (await getImage({ src: s.img, format: 'webp', width: 500, quality: 74 })).src,
-  }))
-);
-
 ---
 
 <section class="servicios" id="servicios">
@@ -40,7 +34,16 @@ const servicios = await Promise.all(
     </p>
     <div class="servicios__grid">
       {servicios.map((s, i) => (
-        <article class="tarjeta reveal reveal--up" style={`background-image:url('${s.src}');transition-delay:${i * 0.12}s`}>
+        <article class="tarjeta reveal reveal--up" style={`transition-delay:${i * 0.12}s`}>
+          <Image
+            class="tarjeta__img"
+            src={s.img}
+            alt={s.alt}
+            widths={[400, 700]}
+            sizes="(max-width: 760px) 100vw, (max-width: 1024px) 50vw, 360px"
+            quality={74}
+            loading="lazy"
+          />
           <div class="tarjeta__info">
             <h3 class="tarjeta__titulo">{s.titulo}</h3>
             <p class="tarjeta__texto">{s.texto}</p>

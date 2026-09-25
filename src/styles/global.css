@@ -327,14 +327,19 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   display: flex;
   align-items: flex-end;
   color: #fff;
-  background-size: cover;
-  background-position: center;
   box-shadow: 0 8px 22px rgba(0,0,0,.18);
   transition: transform .4s ease, box-shadow .4s ease;
 }
 .tarjeta:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 32px rgba(0,0,0,.28);
+}
+.tarjeta__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .tarjeta::after {
   content: "";
@@ -526,9 +531,88 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   color: #fff;
 }
 .contacto h2 { font-size: 34px; text-align: center; color: var(--amarillo); margin-bottom: 44px; }
+.contacto__grid {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.horario {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 30px 26px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.horario__titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.horario__titulo-texto {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--amarillo);
+  font-family: var(--fuente-titulo);
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.horario__titulo-texto svg { flex: 0 0 auto; }
+.horario__estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--fuente-texto);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+.horario__estado::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+.horario__estado.is-disponible { background: rgba(37, 211, 102, 0.16); color: #3ddc73; }
+.horario__estado.is-cerrado { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); }
+.horario__estado.is-disponible::before { animation: horarioPulso 2s ease-out infinite; }
+@keyframes horarioPulso {
+  0% { box-shadow: 0 0 0 0 rgba(61, 220, 115, 0.55); }
+  70% { box-shadow: 0 0 0 7px rgba(61, 220, 115, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(61, 220, 115, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .horario__estado.is-disponible::before { animation: none; }
+}
+.horario__lista { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+.horario__lista li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 16px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.horario__lista li:last-child { border-bottom: none; padding-bottom: 0; }
+.horario__dia { color: #fff; font-weight: 700; }
+.horario__hora { color: #fff; font-weight: 600; }
+.horario__lista li.is-cerrado .horario__hora { color: rgba(255, 255, 255, 0.6); font-weight: 700; }
 .form {
   max-width: 620px;
-  margin: 0 auto;
   display: grid;
   gap: 16px;
 }
@@ -854,6 +938,8 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 
   .calc__campos { grid-template-columns: 1fr; gap: 24px; }
 
+  .contacto__grid { grid-template-columns: 1fr; gap: 30px; max-width: 480px; }
+  .form { max-width: 100%; }
 }
 
 /* >>> Tablet mediana: servicios en 2 columnas */
