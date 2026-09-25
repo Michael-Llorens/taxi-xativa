@@ -3,32 +3,40 @@
 Web oficial de **Taxi Xàtiva**, servicio de taxi en Xàtiva (Valencia) con más de 10 años de
 experiencia. Sitio rápido, responsive y optimizado para SEO local, construido con **Astro**.
 
-🔗 **Producción:** _(pendiente de desplegar en Vercel)_
+🔗 **Producción:** [taxixativa.es](https://taxixativa.es)
 
 ---
 
 ## ✨ Características
 
 - **Hero** con slideshow de fondo (efecto Ken Burns) y titular animado.
-- **Calculadora de presupuesto** en vivo (10 €/km días normales · 15 €/km festivos) que genera
-  una reserva por WhatsApp con la estimación.
+- **Calculadora de presupuesto** en vivo (1,37 €/km días normales · 1,59 €/km nocturno/festivo)
+  que genera una reserva por WhatsApp con la estimación.
+- **Horario** con indicador "Disponible ahora" / "Cerrado ahora" calculado en tiempo real.
 - **Reseñas reales de Google** (5★) de clientes.
-- **Zonas de servicio** (Xàtiva y toda La Costera).
+- **Zonas de servicio** (Xàtiva y toda La Costera) y páginas dedicadas por ruta: aeropuertos de
+  Valencia y Alicante, y trayectos a Gandia, Alicante ciudad y Ontinyent.
 - **Formulario de reserva** que abre WhatsApp con los datos rellenados.
 - **Botón flotante de WhatsApp** con popup tipo chat (apertura automática).
-- **Barra fija en móvil** con accesos rápidos a *Llamar* y *WhatsApp*.
 - **FAQ** con acordeón + datos estructurados `FAQPage`.
-- Aviso de **cookies**, páginas legales (aviso legal, privacidad, cookies) y página **404**.
+- Aviso de **cookies** con gestión real de consentimiento (Google Tag Manager solo se carga si
+  se acepta, y se puede revocar desde "Configurar cookies" en el pie de página), páginas legales
+  (aviso legal, privacidad, cookies) y página **404**.
 
 ## 🚀 SEO y rendimiento
 
 - Datos estructurados **JSON-LD** (`TaxiService` + `LocalBusiness`) con geolocalización,
-  dirección, horario, área de servicio y enlace a la ficha de Google.
-- **Schema `FAQPage`** para resultados enriquecidos.
+  dirección, horario real, área de servicio (Xàtiva y los 14 municipios de La Costera) y enlace
+  a la ficha de Google.
+- **Schema `FAQPage`** y `BreadcrumbList` (en las páginas de ruta) para resultados enriquecidos.
 - `sitemap-index.xml` y `robots.txt` automáticos.
-- Imágenes optimizadas a **WebP** con `astro:assets` (con `srcset` responsive).
-- Open Graph, Twitter Cards, canonical, `theme-color` y `noindex` en la 404.
+- Imágenes optimizadas a **WebP** con `astro:assets` (con `srcset` responsive) e indexables por
+  Google Imágenes (sin `background-image` decorativos para contenido relevante).
+- Open Graph, Twitter Cards, canonical, `theme-color`, favicon en PNG (96/192px) + `site.webmanifest`,
+  y `noindex` en la 404.
+- Fuentes autoalojadas (sin Google Fonts), Google Tag Manager diferido y condicionado al consentimiento.
 - Tipografía fluida (`clamp`) y diseño **responsive** verificado de 360px a 1280px+.
+- Auditado con Lighthouse: 100/100 en Accesibilidad, Buenas Prácticas y SEO.
 
 ## 🛠️ Tecnología
 
@@ -39,15 +47,16 @@ experiencia. Sitio rápido, responsive y optimizado para SEO local, construido c
 ## 📦 Estructura
 
 ```text
-public/            Imágenes estáticas, robots.txt, favicon
+public/            Favicons, site.webmanifest, robots.txt, imágenes referenciadas por URL fija (OG, logo del JSON-LD)
 src/
   assets/img/      Imágenes optimizadas en build (astro:assets)
-  components/      Header, Hero, QuienSoy, PorQue, Servicios, Calculadora,
-                   Zonas, Opiniones, Faq, Contacto, Footer, Whatsapp,
-                   BarraMovil, Cookies
+  components/      Header, Hero, Ventajas, QuienSoy, PorQue, Servicios, ComoReservar,
+                   Calculadora, Zonas, Opiniones, Faq, Contacto, Footer, Whatsapp,
+                   Cookies, RutaInfo
   layouts/         Layout.astro (SEO, JSON-LD, scripts globales)
-  pages/           index.astro, aviso-legal, politica-privacidad,
-                   politica-cookies, 404
+  pages/           index.astro, taxi-aeropuerto-valencia, taxi-aeropuerto-alicante,
+                   taxi-gandia, taxi-alicante, taxi-ontinyent, aviso-legal,
+                   politica-privacidad, politica-cookies, 404
   styles/          global.css
 astro.config.mjs   Configuración (site + sitemap)
 ```
@@ -66,13 +75,18 @@ npm run preview    # previsualiza el build de producción
 ## ✏️ Editar contenido
 
 - **Reseñas:** array `opiniones` en `src/components/Opiniones.astro`.
-- **Zonas de servicio:** array `zonas` en `src/components/Zonas.astro`.
+- **Zonas de servicio:** array `zonas` en `src/components/Zonas.astro` (mantener sincronizado
+  con `areaServed` en `src/layouts/Layout.astro` para el SEO local).
+- **Horario:** array `horario` en `src/components/Contacto.astro` (mantener sincronizado con
+  `openingHoursSpecification` en `src/layouts/Layout.astro`).
 - **Tarifas de la calculadora:** `TARIFA_NORMAL` / `TARIFA_FESTIVO` en `src/components/Calculadora.astro`.
 - **Teléfono / WhatsApp / email:** búscalos en los componentes (`722 26 76 68`, `34722267668`,
   `ricardotaxixativa@gmail.com`).
 - **Textos legales:** páginas en `src/pages/`.
 
 ## ☁️ Despliegue (Vercel)
+
+El proyecto está desplegado en Vercel con despliegue automático al hacer `push` a `main`.
 
 1. Sube el repositorio a GitHub.
 2. En [vercel.com](https://vercel.com) → **Add New → Project** → importa el repositorio.
@@ -81,4 +95,4 @@ npm run preview    # previsualiza el build de producción
 
 ---
 
-© 2025 Taxi Xàtiva — Ricardo Llorens. Todos los derechos reservados.
+© 2026 Taxi Xàtiva — Ricardo Llorens. Todos los derechos reservados.

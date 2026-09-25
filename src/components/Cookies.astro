@@ -24,6 +24,9 @@
     box?.classList.remove('is-visible');
     setTimeout(() => { if (box) box.hidden = true; }, 300);
   };
-  document.getElementById('cookiesSi')?.addEventListener('click', () => cerrar('aceptado'));
+  document.getElementById('cookiesSi')?.addEventListener('click', () => {
+    cerrar('aceptado');
+    (window as any)._gtmLoad?.();
+  });
   document.getElementById('cookiesNo')?.addEventListener('click', () => cerrar('rechazado'));
 </script>

@@ -94,11 +94,16 @@ const jsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Tag Manager — carga diferida para no competir con FCP/LCP -->
+    <!-- Google Tag Manager — carga diferida y solo si hay consentimiento de cookies -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function _gtmLoad(){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P78DDQCV');}
-      if(document.readyState==='complete'){setTimeout(_gtmLoad,1);}else{window.addEventListener('load',function(){setTimeout(_gtmLoad,1);},{once:true});}
+      window._gtmLoad = _gtmLoad;
+      var _cookieConsent;
+      try { _cookieConsent = localStorage.getItem('taxi_cookies_ok'); } catch (e) { _cookieConsent = null; }
+      if (_cookieConsent === 'aceptado') {
+        if(document.readyState==='complete'){setTimeout(_gtmLoad,1);}else{window.addEventListener('load',function(){setTimeout(_gtmLoad,1);},{once:true});}
+      }
     </script>
     <!-- End Google Tag Manager -->
     <title>{title}</title>

@@ -38,6 +38,7 @@ import logoBlanco from '../assets/img/logo-blanco.webp';
         <li><a href="/aviso-legal">Aviso legal</a></li>
         <li><a href="/politica-privacidad">Política de privacidad</a></li>
         <li><a href="/politica-cookies">Política de cookies</a></li>
+        <li><button type="button" id="btnConfigCookies" class="pie__link-btn">Configurar cookies</button></li>
       </ul>
     </div>
   </div>
@@ -45,3 +46,10 @@ import logoBlanco from '../assets/img/logo-blanco.webp';
     <p>© 2026 Taxi Xàtiva — Ricardo Llorens. Todos los derechos reservados.</p>
   </div>
 </footer>
+
+<script>
+  document.getElementById('btnConfigCookies')?.addEventListener('click', () => {
+    localStorage.removeItem('taxi_cookies_ok');
+    window.location.reload();
+  });
+</script>
