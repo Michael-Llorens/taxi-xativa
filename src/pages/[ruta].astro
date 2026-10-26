@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Ventajas from '../components/Ventajas.astro';
+import RutaInfo from '../components/RutaInfo.astro';
+import RutaFicha from '../components/RutaFicha.astro';
+import ComoReservar from '../components/ComoReservar.astro';
+import Faq from '../components/Faq.astro';
+import Contacto from '../components/Contacto.astro';
+import Footer from '../components/Footer.astro';
+import Whatsapp from '../components/Whatsapp.astro';
+import { rutas, type Ruta } from '../data/rutas';
+import { TARIFA_NORMAL, eur, precioOrientativo } from '../data/tarifas';
+
+export function getStaticPaths() {
+  return rutas.map((ruta) => ({ params: { ruta: ruta.slug }, props: { ruta } }));
+}
+
+interface Props {
+  ruta: Ruta;
+}
+
+const { ruta } = Astro.props;
+const site = Astro.site ?? new URL('https://www.taxixativa.es');
+const precio = precioOrientativo(ruta.km);
+const duracionCorta = ruta.duracion.replace(/^(unos|alrededor de) /, '');
+
+const description = `Taxi de Xàtiva ${ruta.aDestino} en ${duracionCorta}: traslado directo puerta a puerta, también la vuelta. Precio orientativo ≈${precio} €. Reserva: 722 26 76 68.`;
+
+const faqs = [
+  {
+    q: `¿Cuánto cuesta un taxi de Xàtiva ${ruta.aDestino}?`,
+    a: `Alrededor de ${precio} € en día laborable (unos ${ruta.km} km con la tarifa oficial de ${eur(TARIFA_NORMAL)} €/km). Es una estimación: el importe final depende del recorrido y de las esperas. En algunos trayectos puedo darte un precio cerrado antes de salir.`,
+  },
+  {
+    q: `¿Cuánto se tarda de Xàtiva ${ruta.aDestino}?`,
+    a: `${ruta.duracion.charAt(0).toUpperCase()}${ruta.duracion.slice(1)}, según el tráfico. Es un traslado directo, puerta a puerta y sin paradas innecesarias.`,
+  },
+  {
+    q: '¿Puedo reservar también la vuelta?',
+    a: ruta.aeropuerto
+      ? 'Sí. Te recojo a la llegada de tu vuelo y te llevo de vuelta a Xàtiva o a donde necesites. Indícame la fecha y la hora al reservar.'
+      : 'Sí. Te recojo a la vuelta en el lugar y a la hora que acordemos.',
+  },
+  ruta.aeropuerto
+    ? {
+        q: '¿Hay sitio para el equipaje? ¿Y si somos un grupo grande?',
+        a: 'El vehículo es amplio y tiene espacio para tu equipaje. Si sois más de cuatro personas, coordino vehículos adicionales para que viajéis juntos.',
+      }
+    : {
+        q: '¿Qué formas de pago aceptas?',
+        a: 'Pago en efectivo y con tarjeta.',
+      },
+  {
+    q: '¿Cómo reservo?',
+    a: 'Llámame al 722 26 76 68 o escríbeme por WhatsApp, de lunes a viernes de 9:00 a 21:00. También puedes rellenar el formulario de esta página.',
+  },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: site.href },
+    { '@type': 'ListItem', position: 2, name: ruta.nombre, item: new URL(`/${ruta.slug}/`, site).href },
+  ],
+};
+---
+
+<Layout title={ruta.title} description={description}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
+  <Header />
+  <main id="contenido">
+    <Hero titulo={ruta.h1} ctaHref="#contacto" />
+    <Ventajas />
+    <RutaInfo titulo={ruta.h2} intro={ruta.intro} />
+    <RutaFicha ruta={ruta} />
+    <ComoReservar />
+    <Faq faqs={faqs} titulo={`Preguntas frecuentes: taxi Xàtiva ${ruta.aDestino}`} />
+    <Contacto />
+  </main>
+  <Footer />
+  <Whatsapp />
+</Layout>

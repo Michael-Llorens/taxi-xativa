@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoBlanco from '../assets/img/logo-blanco.webp';
+import { rutas } from '../data/rutas';
 ---
 
 <div class="tira-taxi"></div>
@@ -12,11 +13,7 @@ import logoBlanco from '../assets/img/logo-blanco.webp';
     <div>
       <h3>Servicios</h3>
       <ul class="pie__legales">
-        <li><a href="/taxi-aeropuerto-valencia">Taxi al aeropuerto de Valencia</a></li>
-        <li><a href="/taxi-aeropuerto-alicante">Taxi al aeropuerto de Alicante</a></li>
-        <li><a href="/taxi-gandia">Taxi Xàtiva a Gandia</a></li>
-        <li><a href="/taxi-alicante">Taxi Xàtiva a Alicante</a></li>
-        <li><a href="/taxi-ontinyent">Taxi Xàtiva a Ontinyent</a></li>
+        {rutas.map((r) => <li><a href={`/${r.slug}/`}>{r.nombre}</a></li>)}
         <li><a href="/#servicios">Trayectos locales y empresas</a></li>
         <li><a href="/#calculadora">Calcular precio</a></li>
       </ul>
@@ -35,9 +32,9 @@ import logoBlanco from '../assets/img/logo-blanco.webp';
     <div>
       <h3>Textos legales</h3>
       <ul class="pie__legales">
-        <li><a href="/aviso-legal">Aviso legal</a></li>
-        <li><a href="/politica-privacidad">Política de privacidad</a></li>
-        <li><a href="/politica-cookies">Política de cookies</a></li>
+        <li><a href="/aviso-legal/">Aviso legal</a></li>
+        <li><a href="/politica-privacidad/">Política de privacidad</a></li>
+        <li><a href="/politica-cookies/">Política de cookies</a></li>
         <li><button type="button" id="btnConfigCookies" class="pie__link-btn">Configurar cookies</button></li>
       </ul>
     </div>
@@ -49,7 +46,7 @@ import logoBlanco from '../assets/img/logo-blanco.webp';
 
 <script>
   document.getElementById('btnConfigCookies')?.addEventListener('click', () => {
-    localStorage.removeItem('taxi_cookies_ok');
+    try { localStorage.removeItem('taxi_cookies_ok'); } catch {}
     window.location.reload();
   });
 </script>

@@ -8,33 +8,38 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /** Precarga la imagen del hero (solo en páginas que lo muestran) */
+  hero?: boolean;
 }
 
 const {
   title = 'Taxi Xàtiva | Ricardo Llorens — Radio Taxi en Xàtiva y Valencia',
   description = 'Taxi en Xàtiva con más de 10 años de experiencia. Puntualidad, comodidad y confianza. Traslados locales, aeropuertos y empresas. Reserva: 722 26 76 68.',
   noindex = false,
+  hero = true,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://taxixativa.es').href;
+const site = Astro.site ?? new URL('https://www.taxixativa.es');
+const canonical = new URL(Astro.url.pathname, site).href;
 
-const heroSm = await getImage({ src: hero1img, format: 'webp', width: 800, quality: 75 });
-const heroMd = await getImage({ src: hero1img, format: 'webp', width: 1080, quality: 72 });
-const heroLg = await getImage({ src: hero1img, format: 'webp', width: 1600, quality: 72 });
-// Usar el origen real de la petición para que WhatsApp pueda cargar la imagen en cualquier dominio
-const ogImage = new URL('/img/og-taxi-castillo.jpg', Astro.url.origin).href;
+// Mismos parámetros que en Hero.astro para que la precarga y la <img> sean el mismo archivo.
+// El original mide 1036 px de ancho: no tiene sentido pedir variantes mayores.
+const heroSm = await getImage({ src: hero1img, format: 'webp', width: 640, quality: 60 });
+const heroMd = await getImage({ src: hero1img, format: 'webp', width: 828, quality: 60 });
+const heroLg = await getImage({ src: hero1img, format: 'webp', width: 1036, quality: 60 });
+const ogImage = new URL('/img/og-taxi-castillo.jpg', site).href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': ['TaxiService', 'LocalBusiness'],
-  '@id': 'https://taxixativa.es/#taxi',
+  '@id': new URL('/#taxi', site).href,
   name: 'Taxi Xàtiva — Ricardo Llorens',
   description,
   telephone: '+34722267668',
   email: 'ricardotaxixativa@gmail.com',
-  url: 'https://taxixativa.es',
+  url: site.href,
   image: ogImage,
-  logo: new URL('/img/logo.webp', Astro.site ?? 'https://taxixativa.es').href,
+  logo: new URL('/img/logo.webp', site).href,
   priceRange: '€',
   currenciesAccepted: 'EUR',
   paymentAccepted: 'Efectivo, Tarjeta',
@@ -138,14 +143,18 @@ const jsonLd = {
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <!-- Preload LCP hero image — in head so the browser discovers it as early as possible -->
-    <link
-      rel="preload"
-      as="image"
-      fetchpriority="high"
-      href={heroSm.src}
-      imagesrcset={`${heroSm.src} 800w, ${heroMd.src} 1080w, ${heroLg.src} 1600w`}
-      imagesizes="100vw"
-    />
+    {hero && (
+      <link
+        rel="preload"
+        as="image"
+        fetchpriority="high"
+        href={heroSm.src}
+        imagesrcset={`${heroSm.src} 640w, ${heroMd.src} 828w, ${heroLg.src} 1036w`}
+        imagesizes="100vw"
+      />
+    )}
+    <!-- Sin JavaScript, los bloques con animación de aparición deben verse igualmente -->
+    <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>

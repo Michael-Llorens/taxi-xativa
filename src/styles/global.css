@@ -1,8 +1,10 @@
-/* Fuentes autoalojadas — sin dependencia de Google Fonts */
-@import '@fontsource/gafata/latin-ext-400.css';
-@import '@fontsource/lato/latin-ext-400.css';
-@import '@fontsource/lato/latin-ext-700.css';
-@import '@fontsource/lato/latin-ext-900.css';
+/* Fuentes autoalojadas — sin dependencia de Google Fonts.
+   Subconjunto "latin": incluye A-Z y los acentos del castellano y valenciano (à, è, ç, ñ, ·).
+   OJO: "latin-ext" NO contiene las letras básicas. */
+@import '@fontsource/gafata/latin-400.css';
+@import '@fontsource/lato/latin-400.css';
+@import '@fontsource/lato/latin-700.css';
+@import '@fontsource/lato/latin-900.css';
 
 /* ============================================================
    Taxi Xàtiva — Ricardo Llorens
@@ -263,23 +265,35 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   transition: opacity .7s ease;
 }
 .carrusel__img.is-active { opacity: 1; }
+/* Fotos aún no necesarias: sin display no se descargan (loading="lazy") */
+.carrusel__img.is-pending { display: none; }
 .carrusel__dots {
   display: flex;
   justify-content: center;
-  gap: 9px;
-  margin-top: 16px;
+  margin-top: 8px;
 }
+/* Botón de 26px (zona táctil cómoda) con el punto dibujado en el centro */
 .carrusel__dot {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.carrusel__dot::before {
+  content: "";
   width: 11px;
   height: 11px;
   border-radius: 50%;
   border: 2px solid rgba(0,0,0,.55);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
+  box-sizing: border-box;
   transition: background .2s, transform .2s;
 }
-.carrusel__dot.is-active { background: #000; transform: scale(1.1); }
+.carrusel__dot.is-active::before { background: #000; transform: scale(1.1); }
 
 /* ===================== POR QUÉ ELEGIR ===================== */
 .porque { padding: 70px 0; text-align: center; background: linear-gradient(180deg, #fafafa 0%, #fff 100%); }
@@ -520,7 +534,7 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   font-size: 14px;
   padding: 0 24px;
 }
-.acordeon__item.activo .acordeon__body { max-height: 200px; padding: 0 24px 18px; }
+.acordeon__item.activo .acordeon__body { max-height: 420px; padding: 0 24px 18px; }
 
 /* ===================== CONTACTO ===================== */
 .contacto {
@@ -827,6 +841,8 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   box-shadow: 0 6px 16px rgba(0,0,0,.1);
 }
 .zonas__item svg { width: 16px; height: 16px; color: var(--amarillo); }
+.zonas__rutas-titulo { font-family: var(--fuente-titulo); font-size: 1.3rem; margin: 44px 0 18px; color: #1a1a1a; }
+.zonas__item--ruta { font-weight: 700; }
 
 /* (Sección de opiniones: estilos propios en src/components/Opiniones.astro) */
 

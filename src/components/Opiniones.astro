@@ -36,7 +36,7 @@ const opiniones = [
 
 <section class="opiniones" id="opiniones">
   <div class="op-header">
-    <h2>Lo que dicen nuestros clientes</h2>
+    <h2>Lo que dicen mis clientes</h2>
     <p class="op-sub">
       Estas son algunas de las opiniones reales de 5 estrellas de clientes que confían en Taxi Xàtiva en Google.
     </p>
@@ -81,7 +81,7 @@ const opiniones = [
       Dejar tu reseña
     </a>
   </div>
-  <p class="op-note">¿Has viajado con nosotros? Tu opinión nos ayuda muchísimo.</p>
+  <p class="op-note">¿Has viajado conmigo? Tu opinión me ayuda muchísimo.</p>
 </section>
 
 <script>
@@ -96,7 +96,11 @@ const opiniones = [
 
     const clones = (add: boolean) => {
       if (add && !clonado) {
-        originales.forEach((c) => track.appendChild(c.cloneNode(true)));
+        originales.forEach((c) => {
+          const copia = c.cloneNode(true) as HTMLElement;
+          copia.setAttribute('aria-hidden', 'true'); // duplicado solo visual
+          track.appendChild(copia);
+        });
         clonado = true;
       } else if (!add && clonado) {
         Array.from(track.children).slice(originales.length).forEach((c) => c.remove());
@@ -138,16 +142,6 @@ const opiniones = [
 
   /* Cabecera */
   .op-header { text-align: center; max-width: 720px; margin: 0 auto 50px; }
-  .op-kicker {
-    display: inline-block;
-    font-family: var(--fuente-titulo);
-    font-weight: 700;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    color: #6e5500;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
   .op-header h2 { font-size: clamp(26px, 3.6vw, 34px); margin-bottom: 12px; color: #1a1a1a; }
   .op-sub { color: #000000; font-size: 1.05rem; margin: 0; }
 

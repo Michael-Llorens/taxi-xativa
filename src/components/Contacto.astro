@@ -1,7 +1,8 @@
 ---
 import { getImage } from 'astro:assets';
 import heroBg from '../assets/img/hero-1.webp';
-const bgOpt = await getImage({ src: heroBg, format: 'webp', width: 1080, quality: 60 });
+// Mismo archivo que la versión grande del hero: ya está en caché
+const bgOpt = await getImage({ src: heroBg, format: 'webp', width: 1036, quality: 60 });
 
 const horario = [
   { dia: 'Lunes', horas: '9:00 – 21:00' },
@@ -17,7 +18,7 @@ const horario = [
 <section
   class="contacto"
   id="contacto"
-  style={`background-image:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.62)),url('${bgOpt.src}')`}
+  data-bg={bgOpt.src}
 >
   <div class="contenedor">
     <h2 class="reveal reveal--up">Contacto</h2>
@@ -46,14 +47,14 @@ const horario = [
       <label class="sr-only" for="f-nombre">Nombre</label>
       <input id="f-nombre" type="text" name="nombre" placeholder="Nombre*" autocomplete="name" required />
       <label class="sr-only" for="f-telefono">Teléfono</label>
-      <input id="f-telefono" type="text" name="telefono" placeholder="Teléfono*" autocomplete="tel" required />
+      <input id="f-telefono" type="tel" name="telefono" placeholder="Teléfono*" autocomplete="tel" required />
       <label class="sr-only" for="f-fyh">Fecha y hora del viaje</label>
       <input id="f-fyh" type="text" name="fyh" placeholder="Fecha y hora del viaje*" required />
       <label class="sr-only" for="f-oyd">Origen y destino</label>
       <input id="f-oyd" type="text" name="oyd" placeholder="Origen y destino*" required />
       <label class="form__check">
         <input type="checkbox" name="politica" required />
-        <span>He leído y acepto la <a href="/politica-privacidad">política de privacidad</a>.</span>
+        <span>He leído y acepto la <a href="/politica-privacidad/">política de privacidad</a>.</span>
       </label>
       <button type="submit" class="btn-amarillo">Reserva</button>
       <p class="form__nota">Al enviar se abrirá <strong>WhatsApp</strong> con tu solicitud. Si prefieres el correo: <a href="mailto:ricardotaxixativa@gmail.com">ricardotaxixativa@gmail.com</a></p>
@@ -87,13 +88,18 @@ const horario = [
     const oyd = (data.get('oyd') || '').toString().trim();
 
     const mensaje =
-      `Hola Ricardo, quiero reservar un taxi:%0A%0A` +
-      `*Nombre:* ${nombre}%0A` +
-      `*Teléfono:* ${telefono}%0A` +
-      `*Fecha y hora:* ${fyh}%0A` +
+      `Hola Ricardo, quiero reservar un taxi:
+
+` +
+      `*Nombre:* ${nombre}
+` +
+      `*Teléfono:* ${telefono}
+` +
+      `*Fecha y hora:* ${fyh}
+` +
       `*Origen y destino:* ${oyd}`;
 
-    window.open(`https://wa.me/34722267668?text=${mensaje}`, '_blank', 'noopener');
+    window.open(`https://wa.me/34722267668?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
   });
 
   document.querySelector('.btn-llamar')?.addEventListener('click', () => {
@@ -101,11 +107,39 @@ const horario = [
     (window as any).dataLayer.push({ event: 'llamada_telefono' });
   });
 
+  // Fondo de la sección: se descarga solo cuando el usuario se acerca a ella
+  const seccion = document.getElementById('contacto');
+  const ponerFondo = () => {
+    if (seccion?.dataset.bg) {
+      seccion.style.backgroundImage = `linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.62)),url('${seccion.dataset.bg}')`;
+    }
+  };
+  if (seccion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        ponerFondo();
+        io.disconnect();
+      }
+    }, { rootMargin: '600px 0px' });
+    io.observe(seccion);
+  } else {
+    ponerFondo();
+  }
+
   const estadoEl = document.getElementById('horarioEstado');
   if (estadoEl) {
-    const ahora = new Date();
-    const dia = ahora.getDay();
-    const horaActual = ahora.getHours() + ahora.getMinutes() / 60;
+    // Hora de España, aunque el visitante esté en otra zona horaria
+    const partes = Object.fromEntries(
+      new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Madrid',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h23',
+      }).formatToParts(new Date()).map((p) => [p.type, p.value])
+    );
+    const dia = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(partes.weekday);
+    const horaActual = Number(partes.hour) + Number(partes.minute) / 60;
     const esLaborable = dia >= 1 && dia <= 5;
     const disponible = esLaborable && horaActual >= 9 && horaActual < 21;
     estadoEl.textContent = disponible ? 'Disponible ahora' : 'Cerrado ahora';

@@ -17,9 +17,9 @@ const { titulo, intro } = Astro.props;
 
 const beneficios = [
   'Puntualidad garantizada, siempre a tiempo.',
-  'Precio acordado de antemano, según la tarifa oficial.',
+  'Precio claro antes de salir: tarifa oficial o precio cerrado, según el trayecto.',
   'Vehículo amplio y cómodo, con sitio para tu equipaje.',
-  'Recogida también a la vuelta: te esperamos a la llegada.',
+  'Recogida también a la vuelta: te espero a la llegada.',
   'Grupos grandes: coordino vehículos adicionales si lo necesitas.',
   'Pago en efectivo o con tarjeta.',
 ];
@@ -55,7 +55,7 @@ const fotos = [
       <div class="carrusel__pista">
         {fotos.map((f, i) => (
           <Image
-            class={`carrusel__img${i === 0 ? ' is-active' : ''}`}
+            class={`carrusel__img${i === 0 ? ' is-active' : ''}${i > 1 ? ' is-pending' : ''}`}
             src={f.src}
             alt={f.alt}
             widths={[400, 640]}
@@ -83,6 +83,9 @@ const fotos = [
     let timer: ReturnType<typeof setInterval>;
     const mostrar = (n: number) => {
       idx = (n + imgs.length) % imgs.length;
+      // Prepara la siguiente foto para que se descargue antes de mostrarla
+      imgs[idx].classList.remove('is-pending');
+      imgs[(idx + 1) % imgs.length].classList.remove('is-pending');
       imgs.forEach((im, i) => im.classList.toggle('is-active', i === idx));
       dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
     };

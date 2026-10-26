@@ -1,4 +1,6 @@
 ---
+import { rutas } from '../data/rutas';
+
 const zonas = [
   'Xàtiva', 'Canals', "l'Olleria", 'Genovés', 'La Llosa de Ranes', 'Vallés',
   'Novelé', 'Barxeta', 'Manuel', "l'Énova", 'Montesa', 'Vallada',
@@ -19,6 +21,12 @@ const zonas = [
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" fill="currentColor"/></svg>
           {z}
         </li>
+      ))}
+    </ul>
+    <h3 class="zonas__rutas-titulo reveal reveal--up">Trayectos más solicitados</h3>
+    <ul class="zonas__lista reveal reveal--up">
+      {rutas.map((r) => (
+        <li><a class="zonas__item zonas__item--ruta" href={`/${r.slug}/`}>{r.nombre} →</a></li>
       ))}
     </ul>
   </div>

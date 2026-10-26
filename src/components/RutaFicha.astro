@@ -1,0 +1,115 @@
+---
+import type { Ruta } from '../data/rutas';
+import { rutas } from '../data/rutas';
+import { TARIFA_NORMAL, eur, precioOrientativo } from '../data/tarifas';
+
+interface Props {
+  ruta: Ruta;
+}
+
+const { ruta } = Astro.props;
+const precio = precioOrientativo(ruta.km);
+const otras = rutas.filter((r) => r.slug !== ruta.slug);
+const waLink = `https://wa.me/34722267668?text=${encodeURIComponent(
+  `¡Hola Ricardo! Me gustaría reservar un taxi de Xàtiva ${ruta.aDestino}.`
+)}`;
+---
+
+<section class="ficha" id="precio">
+  <div class="contenedor">
+    <h2 class="reveal reveal--up">Precio y duración del trayecto</h2>
+    <p class="ficha__sub reveal reveal--up">Taxi de Xàtiva {ruta.aDestino}: lo esencial de un vistazo.</p>
+
+    <dl class="ficha__grid">
+      <div class="ficha__dato reveal reveal--up">
+        <dt>Distancia</dt>
+        <dd>≈ {ruta.km} km</dd>
+      </div>
+      <div class="ficha__dato reveal reveal--up" style="transition-delay:.12s">
+        <dt>Duración</dt>
+        <dd>≈ {ruta.tiempo}</dd>
+      </div>
+      <div class="ficha__dato ficha__dato--precio reveal reveal--up" style="transition-delay:.24s">
+        <dt>Precio aprox.</dt>
+        <dd>≈ {precio} €</dd>
+      </div>
+    </dl>
+
+    <p class="ficha__nota reveal reveal--up">
+      Estimación para un trayecto de ida en día laborable con la tarifa oficial
+      ({eur(TARIFA_NORMAL)} €/km). En algunos trayectos puedo darte un <strong>precio cerrado</strong>
+      antes de salir: pregúntame sin compromiso.
+    </p>
+
+    <div class="ficha__cta reveal reveal--up">
+      <a href="tel:+34722267668" class="btn-amarillo">Llamar: 722 26 76 68</a>
+      <a href={waLink} target="_blank" rel="noopener" class="ficha__wa">Pedir precio por WhatsApp</a>
+    </div>
+
+    <nav class="ficha__otras reveal reveal--up" aria-label="Otros trayectos">
+      <h3>Otros trayectos desde Xàtiva</h3>
+      <ul class="zonas__lista">
+        {otras.map((r) => (
+          <li><a class="zonas__item" href={`/${r.slug}/`}>{r.nombre}</a></li>
+        ))}
+        <li><a class="zonas__item" href="/#calculadora">Calcular otro trayecto</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .ficha { padding: 70px 0; text-align: center; background: linear-gradient(180deg, #fafafa 0%, #fff 100%); }
+  .ficha h2 { font-size: clamp(26px, 3.6vw, 34px); margin-bottom: 10px; }
+  .ficha__sub { color: #555; font-size: 15px; margin: 0 auto 40px; }
+
+  .ficha__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .ficha__dato {
+    background: #fff;
+    border: 1.5px solid #eaeaea;
+    border-radius: 16px;
+    padding: 26px 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.07);
+  }
+  .ficha__dato dt { color: #555; font-size: 0.9rem; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+  .ficha__dato dd { margin: 0; font-family: var(--fuente-titulo); font-size: 1.7rem; color: #1a1a1a; }
+  .ficha__dato--precio { background: var(--amarillo); border-color: var(--amarillo); }
+  .ficha__dato--precio dt { color: #1a1a1a; }
+
+  .ficha__nota { max-width: 640px; margin: 24px auto 0; color: #444; font-size: 0.92rem; line-height: 1.55; }
+
+  .ficha__cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+  .ficha__wa {
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 30px;
+    border-radius: 6px;
+    background: var(--whatsapp-btn);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-size: 15px;
+    transition: background .2s, transform .2s;
+  }
+  .ficha__wa:hover { background: var(--whatsapp-btn-h); transform: translateY(-2px); }
+
+  .ficha__otras { margin-top: 56px; }
+  .ficha__otras h3 { font-family: var(--fuente-titulo); font-size: 1.3rem; margin-bottom: 18px; color: #1a1a1a; }
+
+  @media (max-width: 680px) {
+    .ficha { padding: 50px 0; }
+    .ficha__sub { margin-bottom: 28px; }
+    .ficha__grid { gap: 8px; }
+    .ficha__dato { padding: 14px 6px; border-radius: 12px; }
+    .ficha__dato dt { font-size: 0.68rem; letter-spacing: .2px; margin-bottom: 6px; }
+    .ficha__dato dd { font-size: 1.15rem; }
+    .ficha__cta a { width: 100%; justify-content: center; text-align: center; }
+  }
+</style>

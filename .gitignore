@@ -23,3 +23,6 @@ Thumbs.db
 
 # playwright temp
 .playwright-mcp/
+
+# originales de fotos (la web usa las versiones .webp)
+src/assets/img/*.jpeg

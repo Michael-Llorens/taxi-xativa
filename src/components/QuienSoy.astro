@@ -37,7 +37,7 @@ const fotos = [
       <div class="carrusel__pista">
         {fotos.map((f, i) => (
           <Image
-            class={`carrusel__img${i === 0 ? ' is-active' : ''}`}
+            class={`carrusel__img${i === 0 ? ' is-active' : ''}${i > 1 ? ' is-pending' : ''}`}
             src={f.src}
             alt={f.alt}
             widths={[400, 640]}
@@ -66,6 +66,9 @@ const fotos = [
 
     const mostrar = (n: number) => {
       idx = (n + imgs.length) % imgs.length;
+      // Prepara la siguiente foto para que se descargue antes de mostrarla
+      imgs[idx].classList.remove('is-pending');
+      imgs[(idx + 1) % imgs.length].classList.remove('is-pending');
       imgs.forEach((im, i) => im.classList.toggle('is-active', i === idx));
       dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
     };

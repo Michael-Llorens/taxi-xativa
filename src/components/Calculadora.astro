@@ -1,7 +1,5 @@
 ---
-const TARIFA_NORMAL = 1.37;
-const TARIFA_FESTIVO = 1.59;
-const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+import { TARIFA_NORMAL, TARIFA_FESTIVO, eur, precioOrientativo } from '../data/tarifas';
 ---
 
 <section class="calc" id="calculadora">
@@ -42,8 +40,8 @@ const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2,
 
       <div class="calc__resultado">
         <span class="calc__res-label">Precio aproximado</span>
-        <span class="calc__res-precio" id="calcPrecio">≈ 15 €</span>
-        <span class="calc__res-detalle" id="calcDetalle">10 km × 1,37 €/km</span>
+        <span class="calc__res-precio" id="calcPrecio">≈ {precioOrientativo(10)} €</span>
+        <span class="calc__res-detalle" id="calcDetalle">10 km × {eur(TARIFA_NORMAL)} €/km</span>
       </div>
 
       <a class="calc__reservar" id="calcReservar" href="https://wa.me/34722267668" target="_blank" rel="noopener">
@@ -60,6 +58,8 @@ const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2,
 </section>
 
 <script>
+  import { TARIFA_NORMAL, eur, precioOrientativo } from '../data/tarifas';
+
   const km = document.getElementById('calcKm') as HTMLInputElement | null;
   const range = document.getElementById('calcRange') as HTMLInputElement | null;
   const precio = document.getElementById('calcPrecio');
@@ -68,18 +68,16 @@ const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2,
   const botones = document.querySelectorAll<HTMLButtonElement>('.calc__tarifa');
 
   if (km && range && precio && detalle && reservar) {
-    let tarifa = 1.37;
+    let tarifa = TARIFA_NORMAL;
     let tipoDia = 'día normal';
-    const BAJADA = 1.75; // bajada de bandera, incluida en el total (no se muestra)
     const fmt = (n: number) => n.toLocaleString('es-ES');
-    const fmtTarifa = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     const actualizar = () => {
       let k = parseFloat(km.value);
       if (isNaN(k) || k < 0) k = 0;
-      const total = Math.round(BAJADA + k * tarifa);
+      const total = precioOrientativo(k, tarifa);
       precio.textContent = `≈ ${fmt(total)} €`;
-      detalle.textContent = `${fmt(k)} km × ${fmtTarifa(tarifa)} €/km`;
+      detalle.textContent = `${fmt(k)} km × ${eur(tarifa)} €/km`;
       const msg = encodeURIComponent(
         `¡Hola Ricardo! Quiero reservar un trayecto de ${k} km (${tipoDia}). Presupuesto aproximado: ${total} €.`
       );
@@ -100,8 +98,8 @@ const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2,
         botones.forEach((x) => { x.classList.remove('is-active'); x.setAttribute('aria-pressed', 'false'); });
         b.classList.add('is-active');
         b.setAttribute('aria-pressed', 'true');
-        tarifa = parseFloat(b.dataset.tarifa || '1.37');
-        tipoDia = tarifa >= 1.5 ? 'nocturno o festivo' : 'día normal';
+        tarifa = parseFloat(b.dataset.tarifa || String(TARIFA_NORMAL));
+        tipoDia = tarifa > TARIFA_NORMAL ? 'nocturno o festivo' : 'día normal';
         actualizar();
       })
     );

@@ -17,9 +17,11 @@ const {
   ctaHref = '/#contacto',
 } = Astro.props;
 
-const slide1sm = await getImage({ src: hero1, format: 'webp', width: 800, quality: 75 });
-const slide1md = await getImage({ src: hero1, format: 'webp', width: 1080, quality: 72 });
-const slide1lg = await getImage({ src: hero1, format: 'webp', width: 1600, quality: 72 });
+// Mismos parámetros que la precarga de Layout.astro (el original mide 1036 px de ancho)
+const slide1sm = await getImage({ src: hero1, format: 'webp', width: 640, quality: 60 });
+const slide1md = await getImage({ src: hero1, format: 'webp', width: 828, quality: 60 });
+const slide1lg = await getImage({ src: hero1, format: 'webp', width: 1036, quality: 60 });
+const slide2sm = await getImage({ src: hero2, format: 'webp', width: 1080, quality: 70 });
 const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality: 72 });
 ---
 
@@ -28,7 +30,7 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
     <div class="hero__slide is-active">
       <img
         src={slide1lg.src}
-        srcset={`${slide1sm.src} 800w, ${slide1md.src} 1080w, ${slide1lg.src} 1600w`}
+        srcset={`${slide1sm.src} 640w, ${slide1md.src} 828w, ${slide1lg.src} 1036w`}
         sizes="100vw"
         alt=""
         fetchpriority="high"
@@ -38,7 +40,7 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
         class="hero__slide-img"
       />
     </div>
-    <div class="hero__slide" data-bg={slide2.src}></div>
+    <div class="hero__slide" data-bg={slide2.src} data-bg-sm={slide2sm.src}></div>
   </div>
   <div class="contenedor hero__inner">
     <h1 class="reveal reveal--right">{titulo}</h1>
@@ -69,7 +71,9 @@ const slide2 = await getImage({ src: hero2, format: 'webp', width: 1600, quality
       s = (s + 1) % slides.length;
       const next = slides[s] as HTMLElement;
       if (next.dataset.bg && !next.style.backgroundImage) {
-        next.style.backgroundImage = `url('${next.dataset.bg}')`;
+        // En móvil basta la versión de 1080 px
+        const pequena = window.innerWidth <= 760 && next.dataset.bgSm;
+        next.style.backgroundImage = `url('${pequena ? next.dataset.bgSm : next.dataset.bg}')`;
       }
       next.classList.add('is-active');
     }, 5000);

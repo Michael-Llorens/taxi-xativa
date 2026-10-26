@@ -1,13 +1,22 @@
 ---
 import { Image } from 'astro:assets';
 import faqImg from '../assets/img/faq.webp';
-const faqs = [
-  { q: '¿Con cuánta antelación debo reservar?', a: 'En cualquier momento, sujeto a disponibilidad.' },
-  { q: '¿El precio está cerrado?', a: 'Sí, aplico la tarifa oficial.' },
-  { q: '¿Trabajas con empresas?', a: 'Sí, ofrezco traslados para profesionales y compañías.' },
-  { q: '¿Qué formas de pago aceptas?', a: 'Pago en efectivo y con tarjeta.' },
-  { q: '¿Ofreces servicios a aeropuertos?', a: 'Sí, traslados directos a los aeropuertos de Valencia, Alicante y otros destinos.' },
-];
+
+interface Props {
+  faqs?: { q: string; a: string }[];
+  titulo?: string;
+}
+
+const {
+  faqs = [
+    { q: '¿Con cuánta antelación debo reservar?', a: 'Puedes reservar cuando quieras, sujeto a disponibilidad. Para aeropuertos y viajes largos, cuanto antes mejor. Atiendo de lunes a viernes, de 9:00 a 21:00.' },
+    { q: '¿El precio está cerrado?', a: 'Depende del trayecto. En algunos viajes puedo darte un precio cerrado antes de salir; en el resto se aplica la tarifa oficial del taxímetro. Pregúntame y te digo cuál es tu caso.' },
+    { q: '¿Trabajas con empresas?', a: 'Sí, ofrezco traslados para profesionales y compañías.' },
+    { q: '¿Qué formas de pago aceptas?', a: 'Pago en efectivo y con tarjeta.' },
+    { q: '¿Ofreces servicios a aeropuertos?', a: 'Sí, traslados directos a los aeropuertos de Valencia, Alicante y otros destinos.' },
+  ],
+  titulo = 'Preguntas frecuentes',
+} = Astro.props;
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -25,10 +34,10 @@ const faqSchema = {
 
 <section class="faq">
   <div class="contenedor">
-    <h2 class="reveal reveal--up">Preguntas frecuentes</h2>
+    <h2 class="reveal reveal--up">{titulo}</h2>
     <div class="faq__cols">
       <div class="faq__img reveal reveal--left">
-        <Image src={faqImg} alt="Taxi Xàtiva" width={440} loading="lazy" />
+        <Image src={faqImg} alt="Taxi de Ricardo Llorens en Xàtiva" width={440} loading="lazy" />
       </div>
       <div class="acordeon reveal reveal--right">
         {faqs.map((f, i) => (
