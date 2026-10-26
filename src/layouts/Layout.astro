@@ -3,6 +3,11 @@ import '../styles/global.css';
 import Cookies from '../components/Cookies.astro';
 import { getImage } from 'astro:assets';
 import hero1img from '../assets/img/hero-1.webp';
+// Fuentes usadas en la primera pantalla: se precargan para que lleguen juntas y pronto.
+// Si llegan de una en una, el navegador recoloca todo el texto tras cada una.
+import fuenteGafata from '@fontsource/gafata/files/gafata-latin-400-normal.woff2?url';
+import fuenteLato400 from '@fontsource/lato/files/lato-latin-400-normal.woff2?url';
+import fuenteLato700 from '@fontsource/lato/files/lato-latin-700-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -111,6 +116,9 @@ const jsonLd = {
       }
     </script>
     {/* End Google Tag Manager */}
+    {[fuenteGafata, fuenteLato400, fuenteLato700].map((href) => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />
+    ))}
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
