@@ -5,7 +5,7 @@ const waLink = `https://wa.me/${telefono}?text=${mensaje}`;
 ---
 
 <div class="wapp-widget">
-  <!-- Popup tipo píldora (réplica del de clinicalauraserra.com) -->
+  {/* Popup tipo píldora que invita a escribir por WhatsApp */}
   <div class="wapp-tip" id="wappPop" hidden>
     <button class="wapp-tip__close" id="wappClose" type="button" aria-label="Cerrar mensaje">&times;</button>
     <a class="wapp-tip__link" href={waLink} target="_blank" rel="noopener">
@@ -14,7 +14,7 @@ const waLink = `https://wa.me/${telefono}?text=${mensaje}`;
     </a>
   </div>
 
-  <!-- Botón flotante (réplica exacta del de taxixativa.es) -->
+  {/* Botón flotante de WhatsApp */}
   <a
     class="wapp"
     id="wappBtn"

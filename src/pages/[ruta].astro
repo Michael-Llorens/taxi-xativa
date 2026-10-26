@@ -24,9 +24,7 @@ interface Props {
 const { ruta } = Astro.props;
 const site = Astro.site ?? new URL('https://www.taxixativa.es');
 const precio = precioOrientativo(ruta.km);
-const duracionCorta = ruta.duracion.replace(/^(unos|alrededor de) /, '');
-
-const description = `Taxi de Xàtiva ${ruta.aDestino} en ${duracionCorta}: traslado directo puerta a puerta, también la vuelta. Precio orientativo ≈${precio} €. Reserva: 722 26 76 68.`;
+const description = `Taxi de Xàtiva ${ruta.aDestino} en ${ruta.tiempo}: traslado directo puerta a puerta, también la vuelta. Precio aprox. ≈${precio} €. Tel. 722 26 76 68.`;
 
 const faqs = [
   {

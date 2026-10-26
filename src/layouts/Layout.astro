@@ -99,7 +99,7 @@ const jsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Tag Manager — carga diferida y solo si hay consentimiento de cookies -->
+    {/* Google Tag Manager — carga diferida y solo si hay consentimiento de cookies */}
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function _gtmLoad(){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P78DDQCV');}
@@ -110,14 +110,14 @@ const jsonLd = {
         if(document.readyState==='complete'){setTimeout(_gtmLoad,1);}else{window.addEventListener('load',function(){setTimeout(_gtmLoad,1);},{once:true});}
       }
     </script>
-    <!-- End Google Tag Manager -->
+    {/* End Google Tag Manager */}
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#ffd331" />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
 
-    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+    {/* Open Graph (WhatsApp, Facebook, LinkedIn) */}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Taxi Xàtiva" />
     <meta property="og:title" content={title} />
@@ -131,7 +131,7 @@ const jsonLd = {
     <meta property="og:image:alt" content="Taxi Xàtiva de Ricardo Llorens frente al Castillo de Xàtiva" />
     <meta property="og:locale" content="es_ES" />
 
-    <!-- Twitter / X -->
+    {/* Twitter / X */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -142,7 +142,7 @@ const jsonLd = {
     <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <!-- Preload LCP hero image — in head so the browser discovers it as early as possible -->
+    {/* Preload LCP hero image — in head so the browser discovers it as early as possible */}
     {hero && (
       <link
         rel="preload"
@@ -153,15 +153,15 @@ const jsonLd = {
         imagesizes="100vw"
       />
     )}
-    <!-- Sin JavaScript, los bloques con animación de aparición deben verse igualmente -->
+    {/* Sin JavaScript, los bloques con animación de aparición deben verse igualmente */}
     <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
+    {/* Google Tag Manager (noscript) */}
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P78DDQCV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    {/* End Google Tag Manager (noscript) */}
     <a href="#contenido" class="skip-link">Saltar al contenido</a>
     <slot />
 
