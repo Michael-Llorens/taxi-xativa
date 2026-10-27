@@ -729,12 +729,9 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   right: 24px;
   bottom: 24px;
   z-index: 200;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-/* Botón flotante — réplica del de clinicalauraserra.com (glifo verde con resplandor) */
+/* Botón flotante (glifo verde con resplandor) */
 .wapp {
   position: relative;
   flex: 0 0 auto;
@@ -755,9 +752,13 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
 }
 .wapp svg { display: block; width: 48px; height: 48px; pointer-events: none; }
 
-/* Popup tipo píldora — réplica del de clinicalauraserra.com, fondo amarillo claro y texto negro */
+/* Popup tipo píldora, fondo amarillo claro y texto negro.
+   Posición absoluta: al aparecer no desplaza el botón (evita saltos de diseño) */
 .wapp-tip {
-  position: relative;
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  max-width: calc(100vw - 100px);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -768,12 +769,12 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   box-shadow: 0 6px 22px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.12);
   font-size: 15px;
   font-weight: 600;
-  white-space: nowrap;
-  transform: translateX(10px);
+  width: max-content; /* una línea si cabe; si no, max-width la parte en dos */
+  transform: translate(10px, -50%);
   opacity: 0;
   transition: opacity .25s ease, transform .25s ease;
 }
-.wapp-tip.is-open { opacity: 1; transform: translateX(0); }
+.wapp-tip.is-open { opacity: 1; transform: translate(0, -50%); }
 .wapp-tip[hidden] { display: none; }
 .wapp-tip::after {
   content: "";
@@ -786,9 +787,9 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   border-color: transparent transparent transparent #fdf3c7;
 }
 .wapp-tip__close {
-  flex: 0 0 20px;
-  width: 20px;
-  height: 20px;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
   border: 0;
   background: rgba(0,0,0,.10);
   color: #000;
@@ -893,6 +894,14 @@ h1, h2, h3 { font-family: var(--fuente-titulo); font-weight: 600; }
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ===================== RENDIMIENTO ===================== */
+/* Las secciones bajo la primera pantalla no se maquetan hasta que el usuario se acerca.
+   "auto" recuerda su altura real una vez vistas, así no hay saltos al volver a subir. */
+main > section:not(.hero):not(.ventajas) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 /* ===================== ANIMACIONES SCROLL ===================== */

@@ -182,7 +182,8 @@ const jsonLd = {
         if (cabecera) cabecera.classList.toggle('cabecera--scroll', window.scrollY > 30);
       };
       window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      // En el siguiente fotograma: leer scrollY durante la carga obliga a maquetar toda la página
+      requestAnimationFrame(onScroll);
 
       // Animaciones de aparición al hacer scroll (fadeInLeft/Right/Up)
       const els = document.querySelectorAll('.reveal');
