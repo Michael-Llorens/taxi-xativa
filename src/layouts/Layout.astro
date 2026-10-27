@@ -121,7 +121,7 @@ const jsonLd = {
     ))}
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#ffd331" />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
 
@@ -130,7 +130,7 @@ const jsonLd = {
     <meta property="og:site_name" content="Taxi Xàtiva" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:secure_url" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
